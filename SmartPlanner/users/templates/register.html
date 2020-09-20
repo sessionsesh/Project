@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <link rel="stylesheet" href="static/css/login.css">
+   
+
+<title>Регистрация </title>
+</head>
+  <body>
+    <div class="loginForm" style="width: 500px;">
+    <h1 class="display-4">Зарегистрировать нового пользователя</h1>
+   
+        <div class='col-md-6'>
+            <form action="" method="post">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input type="submit" value="Зарегистрироваться">
+                </form>
+        </div>
+        <p>Уже есть аккаунт? <a  href="/login">Войти</a> </p>
+                 
+    </div>
+
+</body>
+</html>

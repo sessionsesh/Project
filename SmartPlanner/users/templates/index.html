@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MegaPlan</title>
+	 <meta charset="UTF-8">
+	<link rel="stylesheet" href="../static/css/landing.css">
+</head>
+<body>
+
+	
+
+
+	<div class="main_content">
+		<div class="header">
+			<div class="header_section">
+				<span class="headerlogo">
+					MegaPlan
+				</span>			
+			</div>
+			<div class="header_section">
+			
+				
+			<a href="{% url 'login'%}">
+				<div class="header_item headerButton" id="login">Войти</div></a>
+
+				<a href="{% url 'register'%}">
+					<div class="header_item headerButton" id="register">Зарегистрироваться</div>
+				</a>
+			</div>
+		</div>
+
+
+
+
+		<div class="wall">
+			<span style="text-align: center;">Управляйте собственным временем</span>
+		</div>
+
+		
+		<div class="allText">
+			<h1>Пора воплощать великие цели</h1>
+			<p>
+				MegaPlan - это система для планирования и достижения целей. Это не простой ToDo лист, а продуманная система планирования задач, которая подстраивается под вас. Долой прокрастинацию и бессистемность!
+			</p>
+
+			<h1>Как  это работает</h1>
+
+			<div class="listItem">
+				<img class="demo_image" src="../static/img/1Pic.png"/>
+				<p>
+					1. Вы создаете себе глобальную цель
+				</p>
+			</div>
+
+			<div class="listItem">
+				<img class="demo_image" src="../static/img/2Pic.png"/>
+				<p>
+					2. Сохраняете задания. Это могут быть книги в формате pdf, ссылки на статьи, видео или просто текст.
+
+				</p>
+			</div>
+
+			<div class="listItem">
+				<img class="demo_image" src="../static/img/3Pic.png"/>
+				<p>
+					3. Приложение автоматически составит вам расписание и установит время на тренировки
+				</p>
+			</div>
+
+			<div class="listItem">
+					<img class="demo_image" src="../static/img/4Pic.png"/>
+				<p>
+					4. Подключив уведомления, вы будете получать напоминания о ваших тренировках
+				</p>
+			</div>
+
+			<div class="listItem">
+				<img class="demo_image" src="../static/img/5Pic.png"/>
+				<p>
+					5. Вы всегда видите ваш прогресс и сколько осталось до желаемой цели
+				</p>
+			</div>
+
+			<div class="listItem">
+				<img class="demo_image" src="../static/img/6Pic.png"/>
+				<p>
+					6. Появилось свободное время или внезапно требуют внеплановый отчет? Список дел можно скорректировать
+				</p>
+			</div>
+
+
+			<div id="hey">
+			<h1> Ну что? Может попробуем?</h1>
+			<div>
+
+			<a href="{% url 'login'%}">
+				<div class="header_item headerButton" id="login">Войти</div></a>
+
+			<a href="{% url 'register'%}">
+				<div class="header_item headerButton" id="register">Зарегистрироваться</div>
+			</a>
+
+			</div>
+			</div>
+
+		</div>
+
+
+		</div>
+
+
+</body>
+</html>

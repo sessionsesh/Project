@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    <title>Новая цель</title>
+{% endblock %}
+{% block body %}
+    <div class="site-wrapper" style="margin-top:75px;">
+            <div class="text-center"
+                >
+
+                <h1 align="center">Отлично, давайте поставим цель</h1>
+                <div class="container">
+                    <center>
+                        <form id="user_form" method="post">
+                            <table border="1">
+                                {% csrf_token %}
+                                {% for field in project_form %}
+                                  {{ field.help_text}}
+                                  {{ field }}
+                                {% endfor %}
+                            </table>
+                            <button type="submit" name="submit" value="Register" class="btn btn-success">Сохранить
+                            </button>
+                        </form>
+                    </center>
+                </div>
+            </div>
+    </div>
+{% endblock %}

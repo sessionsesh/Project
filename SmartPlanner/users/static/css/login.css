@@ -1,0 +1,135 @@
+		a{
+			font-size: 20px;
+			color: #3AADFF;
+			text-decoration: none; 
+			text-align: center;
+		}
+
+		#logo{
+			width: 180px;
+			height: 140px;
+
+		}
+
+		form{
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-content: center;
+		}
+
+		a:hover{
+			color: #3092D3;
+		}
+
+		.container{
+			margin-top: 18%;			
+			display: flex;
+			justify-content: center;
+		}
+
+		#submitButton{
+			background-color: green;
+		}
+
+		.main_content{
+			display: flex;
+			flex-direction: column;			
+			align-items: center;
+		}
+
+
+		body{
+			display: flex;
+			flex-direction: column;
+			align-items: center;			
+			background-color: #262626;
+			background-image: url("../img/pattern.png");
+		}
+
+		@font-face{
+			font-family: "Evolventa-Bold";
+			src: url("../fonts/Evolventa-Bold.ttf");
+		}
+
+		@font-face{
+			font-family: "Evolventa-Regular";
+			src: url("../fonts/Evolventa-Regular.ttf");
+		}
+
+
+		.loginForm{
+			display: flex;
+  			flex-direction:column;
+			border-radius: 15px;
+			background-color: white;
+			font-family: Evolventa-Bold, sans-serif;
+			padding: 16px;
+			
+		}
+
+		input[type=text], input[type=password] {
+		  width: 90%;
+		  padding: 15px;
+		  margin: 5px 0 22px 0;
+		  display: inline-block;
+		  border: none;
+		  background: #f1f1f1;
+		  font-family: Evolventa-Regular;
+		  border-radius: 10px;
+
+		}
+
+		input[type=text]:focus, input[type=password]:focus {
+		  background-color: #ddd;
+		  outline: none;
+		  border-radius: 10px;
+		}
+
+		input[type=submit]{
+			border-radius: 10px;
+			height: 40px;
+			background-color: #79DB4C;
+			font-family: "Evolventa-Bold";
+			color:white;
+			border-style: solid;
+			border-color: #79DB4C;
+		}
+
+		input[type=submit]:hover{
+			background-color: #69D132;
+		}
+
+		input[type=submit]:focus{
+			background-color: #64B53F;
+			border-radius: 10px;
+		}
+
+
+		hr {
+		  border: 1px solid #f1f1f1;
+		  width: 100%;
+		  margin-bottom: 25px;
+		}
+
+		.registerbtn {
+		  background-color: #4CAF50;
+		  color: white;
+		  padding: 16px 20px;
+		  margin: 1px 0;
+		  border: none;
+		  cursor: pointer;
+		  width: 100%;
+		  opacity: 0.9;
+		  font-family: Evolventa-Bold, sans-serif;
+		  border-radius: 10px;
+		}
+
+		.registerbtn:hover {
+		  opacity:1;
+		}
+
+		#register_content{
+			
+  			
+		}
