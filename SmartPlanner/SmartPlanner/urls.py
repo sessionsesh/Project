@@ -11,6 +11,7 @@ urlpatterns = [
     path('logout', uviews.logout_view, name = 'logout'), # Тут пока ничего нет
     path('register', uviews.register_view, name = 'register'),
     path('login', uviews.login_view, name = 'login'),
+    path('reset', uviews.reset_password_view, name = 'reset_password'),
     path('mypage', gviews.main_view, name = 'my goals'),
     path('add', gviews.add_goal_view, name = 'add_goal'),
     path('view/<ID>', gviews.goal_view, name='goal_view'),

@@ -9,9 +9,7 @@
             <form action="" method="post"> {% csrf_token %}
                 {{form.as_p}}
                 <input type="submit"  value="Войти">
-                <p>Нет аккаунта? <a  href="/register">Регистрация</a> </p>
-                 
-            
+                <p>Забыли пароль?<a href="/reset"> Восстановить </a></p>
                 </form>
       
     </div>
