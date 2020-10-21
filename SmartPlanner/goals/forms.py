@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from .models import *
+from goals import parser
 
 class GoalCreateForm(forms.ModelForm):
     class Meta:

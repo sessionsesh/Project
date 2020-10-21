@@ -80,8 +80,8 @@ WSGI_APPLICATION = 'SmartPlanner.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'mega_server',
-        'USER': 'admin',
+        'NAME': 'database',
+        'USER': 'postgres',
         'PASSWORD': 'password',
         'HOST': 'localhost',
         'PORT': '5432',

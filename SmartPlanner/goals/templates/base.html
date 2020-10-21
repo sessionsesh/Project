@@ -1,94 +1,108 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-   <style type="text/css">
-      body {
-      margin-top: 50px;
-      background-color: #f1f1f1;
-      }
-      .nav-pills .nav-link.active,
-      .nav-pills .show>.nav-link {
-      background-color: #17A2B8;
-      }
-      .dropdown-menu {
-      top: 60px;
-      right: 0px;
-      left: unset;
-      width: 460px;
-      box-shadow: 0px 5px 7px -1px #c1c1c1;
-      padding-bottom: 0px;
-      padding: 0px;
-      }
-      .dropdown-menu:before {
-      content: "";
-      position: absolute;
-      top: -20px;
-      right: 12px;
-      border: 10px solid #343A40;
-      border-color: transparent transparent #343A40 transparent;
-      }
-      .head {
-      padding: 5px 15px;
-      border-radius: 3px 3px 0px 0px;
-      }
-      .footer {
-      padding: 5px 15px;
-      border-radius: 0px 0px 3px 3px;
-      }
-      .notification-box {
-      padding: 10px 0px;
-      }
-      .bg-gray {
-      background-color: #eee;
-      }
-      @media (max-width: 640px) {
-      .dropdown-menu {
+<style type="text/css">
+  body {
+    margin-top: 50px;
+    background-color: #f1f1f1;
+  }
+
+  .nav-pills .nav-link.active,
+  .nav-pills .show>.nav-link {
+    background-color: #17A2B8;
+  }
+
+  .dropdown-menu {
+    top: 60px;
+    right: 0px;
+    left: unset;
+    width: 460px;
+    box-shadow: 0px 5px 7px -1px #c1c1c1;
+    padding-bottom: 0px;
+    padding: 0px;
+  }
+
+  .dropdown-menu:before {
+    content: "";
+    position: absolute;
+    top: -20px;
+    right: 12px;
+    border: 10px solid #343A40;
+    border-color: transparent transparent #343A40 transparent;
+  }
+
+  .head {
+    padding: 5px 15px;
+    border-radius: 3px 3px 0px 0px;
+  }
+
+  .footer {
+    padding: 5px 15px;
+    border-radius: 0px 0px 3px 3px;
+  }
+
+  .notification-box {
+    padding: 10px 0px;
+  }
+
+  .bg-gray {
+    background-color: #eee;
+  }
+
+  @media (max-width: 640px) {
+    .dropdown-menu {
       top: 50px;
       left: -16px;
       width: 290px;
-      }
-      .nav {
+    }
+
+    .nav {
       display: block;
-      }
-      .nav .nav-item,
-      .nav .nav-item a {
+    }
+
+    .nav .nav-item,
+    .nav .nav-item a {
       padding-left: 0px;
-      }
-      .message {
+    }
+
+    .message {
       font-size: 13px;
-      }
-      .b-container{
-    width:200px;
-    height:150px;
-    background-color: #ccc;
-    margin:0px auto;
-    padding:10px;
-    font-size:30px;
-    color: #fff;
-}
-      }
-   </style>
-   <meta charset="utf-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-  <nav class="navbar navbar-default dark">
+    }
+
+    .b-container {
+      width: 200px;
+      height: 150px;
+      background-color: #ccc;
+      margin: 0px auto;
+      padding: 10px;
+      font-size: 30px;
+      color: #fff;
+    }
+  }
+</style>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- Bootstrap -->
+<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+<nav class="navbar navbar-default dark">
+  <div class="container">
+    <div class="navbar-header">
+
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
       <div class="container">
-         <div class="navbar-header">
+        <ul class="nav navbar-nav menu-right">
 
-         </div>
-         <div id="navbar" class="navbar-collapse collapse">
-            <div class="container">
-               <ul class="nav navbar-nav menu-right">
-
-               </ul>
-            </div>
-         </div>
+        </ul>
       </div>
-   </nav>
-   <body style="margin-top:50px;">
-   <div class="footer-grid__item footer-block">
+    </div>
+  </div>
+</nav>
+
+<body>
+  <div class="footer-grid__item footer-block">
     <h3 class="footer-block__title">Меню</h3>
     <div class="footer-block__content">
       <ul class="footer-menu">
@@ -101,55 +115,56 @@
         <li class="footer-menu__item">
           <a href="" class="footer-menu__item-link">Задачи</a>
         </li>
-          <li class="footer-menu__item">
+        <li class="footer-menu__item">
           <a href="" class="footer-menu__item-link">Профиль</a>
         </li>
       </ul>
     </div>
-        </div>
-        <div class="container my-4">
-		<div class="row">
-			<div class="col-md-8 mx-auto">
-                {% if messages %}
-          {% for message in messages %}
-            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-              <div class="alert alert-danger messages">
-                <span{% if message.tags %} class="{{ message.tags }}"{% endif %}>
-                Ошибка  {{ message }}<br/>
-                </span>
-              </div>
-            {%else %}
-              <div class="alert alert-success messages">
-                <span{% if message.tags %} class="{{ message.tags }}"{% endif %}>
-                {{ message }}<br/>
-                </span>
-              </div>
-            {% endif %}
-          {% endfor %}
-			  {% endif %}
-			</div>
-		</div>
   </div>
-      {% block body %}
-      <section class="hero-fullscreen">
-         <div class="hero-slider hero-parallax-fullscreen owl-carousel navigation-thin" style="margin-right:20px;">
-            <div class="slide bg-fitness-2">
-               <div class="hero-container container">
-                  <div class="hero-content scroll-opacity">
-                     <div class="appear container text-center fitness-hero">
-                        <h4 style="white: black;font-weight:bold;">Think. Gather. Build.</h4>
-                     </div>
-                  </div>
-               </div>
+  <div class="container my-4">
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+        <div class="alert alert-danger messages">
+          <span{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+            Ошибка {{ message }}<br />
+            </span>
+        </div>
+        {%else %}
+        <div class="alert alert-success messages">
+          <span{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+            {{ message }}<br />
+            </span>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% block body %}
+  <section class="hero-fullscreen">
+    <div class="hero-slider hero-parallax-fullscreen owl-carousel navigation-thin" style="margin-right:20px;">
+      <div class="slide bg-fitness-2">
+        <div class="hero-container container">
+          <div class="hero-content scroll-opacity">
+            <div class="appear container text-center fitness-hero">
+              <h4 style="white: black;font-weight:bold;">Think. Gather. Build.</h4>
             </div>
-            <!-- End Slide 2 -->
-         </div>
-      </section>
+          </div>
+        </div>
+      </div>
+      <!-- End Slide 2 -->
+    </div>
+  </section>
   {%endblock%}
-     <script src="{% static 'js/jquery.min.js' %} "></script> <!-- Не удаляй, это для всплыва -->
+  <script src="{% static 'js/jquery.min.js' %} "></script> <!-- Не удаляй, это для всплыва -->
   <script src="{% static 'js/bootstrap.bundle.min.js' %} "></script><!-- Не удаляй, это для всплыва -->
   <script src="{% static 'js/main.js' %} "></script><!-- Не удаляй, это для всплыва -->
-    {% block javascript %}
-    {% endblock %}
-   </body>
+  {% block javascript %}
+  {% endblock %}
+</body>
+
 </html>
