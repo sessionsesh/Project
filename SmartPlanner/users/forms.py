@@ -9,7 +9,7 @@ class UserRegisterForm(forms.ModelForm):
     login = forms.CharField(label='Логин',widget=forms.TextInput(attrs={'class': 'form-control'}))
     email = forms.CharField(widget=forms.TextInput(attrs={ 'class': 'form-control'}))
     password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class':'form-control'}))
-    password2 = forms.CharField(label='Повторите пароль',widget=forms.TextInput(attrs={'class':'form-control'}))
+    password_2 = forms.CharField(label='Повторите пароль',widget=forms.TextInput(attrs={'class':'form-control'}))
 
 
     class Meta:
@@ -23,12 +23,11 @@ class UserRegisterForm(forms.ModelForm):
             raise forms.ValidationError("Ой! Этот логин уже занят, попробуйте другой")
         except User.DoesNotExist:
             password1 = self.cleaned_data.get("password")
-            password2 = self.cleaned_data.get("password2")
-            if password1 and password2 and password1 != password2:
+            password_2 = self.cleaned_data.get("password_2")
+            if password1 and password_2 and password1 != password_2:
+                print('Go fuck yourself')
                 raise forms.ValidationError(
-                'Пароли не совпадают!',
-                code='password_mismatch',
-            )
+                'Пароли не совпадают!'            )
             users = Profile.objects.filter(email=self.cleaned_data.get("email"))
             if len(users) > 0:
                 raise forms.ValidationError("Пользователь с таким email-адресом уже зарегистрирован")
@@ -67,6 +66,39 @@ class UserLoginForm(forms.Form):
     def get_user(self):
         return self.authed_user
 
+
+class PasswordResetForm(forms.Form):
+    email = forms.EmailField(label = 'email-адрес', widget=forms.TextInput(attrs={'class': 'form-control', 'autocomplete':'off'}), error_messages={'invalid': 'Некорректный адрес'})
+    password = forms.CharField(label='Новый пароль', widget=forms.PasswordInput(attrs={'class': 'form-control', 'autocomplete':'off'}))
+    password_2 = forms.CharField(label='Повторите пароль', widget=forms.PasswordInput(attrs={'class': 'form-control','autocomplete':'off'}))
+    #TODO: добавить проверку на надежность
+
+
+    def clean(self, *args, **kwargs): # проверка зависящих друг от друга полей
+        cleaned_data = super().clean()
+        try:
+            password_1 = cleaned_data.get('password')
+            password_2 = cleaned_data.get('password_2')
+            email = cleaned_data.get('email')
+            users = Profile.objects.filter(email=email)
+            if len(users) != 1:
+                raise forms.ValidationError("Пользователь с таким email-адресом не найден")
+            self.user = users[0]
+            if password_1 and password_2 and password_1 != password_2:
+                raise forms.ValidationError('Пароли не совпадают!')
+            return super(PasswordResetForm, self).clean(*args, **kwargs)
+        except KeyError:
+            raise forms.ValidationError("Не все поля заполнены")
+        raise forms.ValidationError("Неверно введены логин или пароль")
+
+    def save(self, commit=True):
+        # TODO: убрать это  и сделать подтверждение через емейл
+        password = self.cleaned_data["password"]
+        self.user = self.user.user
+        self.user.set_password(password)
+        if commit:
+            self.user.save()
+        return self.user
 '''
 
 class DisconnectForm(forms.Form):
