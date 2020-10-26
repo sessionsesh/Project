@@ -32,9 +32,10 @@ def login_view(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(username=username.strip(),password=password.strip())
-        login(request, user)
-        messages.success(request, 'Добро пожаловать!')
-        return redirect('/mypage') #TODO: перенаправлять в личный кабинет
+        if user is not None:
+            login(request, user)
+            messages.success(request, 'Добро пожаловать!')
+            return redirect('/mypage') #TODO: перенаправлять в личный кабинет
     return render(request, 'login.html', {'form': user_form})
 
 

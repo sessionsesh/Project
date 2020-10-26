@@ -21,15 +21,6 @@ def main_view(request):
 def delete_task(request, ID):
     task = Task.objects.get(pk=ID)
     print(ID)
-    if request.method == "POST":
-        task.delete()
-        data['form_is_valid'] = True
-        books = Task.objects.all()
-        data['book_list'] = render_to_string('book_list_2.html', {'books': books})
-    else:
-        context = {'book':task}
-        data['html_form'] = render_to_string('task_delete.html', context, request=request)
-        print('Hello')
     if request.user == task.goal.owner:
         task.delete()
         return redirect('/mypage')
@@ -105,3 +96,6 @@ def add_task_view(request, ID):
 def edit_goal_view(request, ID):
     pass
 
+@login_required
+def calendar_view(request):
+    return render(request, 'calendar.html')
