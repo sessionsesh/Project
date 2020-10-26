@@ -16,17 +16,14 @@ class GoalCreateForm(forms.ModelForm):
             'created',
             'end_date',
         )
-        help_texts = {
-            'title':'Название',
-            'description':'Немного о цели (необязательно)'
-        }
+
         fields = (
             'title',
             'description',
         )
         widgets = {
-            'title': forms.Textarea(attrs={'cols': 100, 'rows': 1}),
-            'description': forms.Textarea(attrs={'cols': 100, 'rows': 20, }),
+            'title': forms.Textarea(attrs={'cols': 100, 'rows': 1, 'class':'goal-title', 'placeholder':'Название'}),
+            'description': forms.Textarea(attrs={'cols': 100, 'rows': 20, 'class':'goal-description', 'placeholder':'Описание'}),
           #  'end_date': forms.DateInput(attrs={'class': 'datefield'}), # TODO: добавить автоматический расчет
         }
 
