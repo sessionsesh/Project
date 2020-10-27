@@ -82,7 +82,9 @@ def add_task_view(request, ID):
                     return redirect('/mypage')
                 else:
                     messages.error(request,  "Проверьте корректность ссылки! ")
-                    return render(request, 'add_task.html', {'project_form': task_form})
+                    tasks = list(Task.objects.filter(goal=goal))
+                    args = {"goal": goal, "tasks": tasks}
+                    return render(request, 'goal_view.html', args)
            # return redirect("/mygoal/{}".format(str(project.id))) # TODO: на цель пользователя
             else:
                 task_form = TaskCreateForm()

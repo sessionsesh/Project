@@ -4,7 +4,9 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from .models import *
-from goals import parser
+import os
+import sys
+
 
 class GoalCreateForm(forms.ModelForm):
     class Meta:
@@ -61,6 +63,9 @@ class TaskCreateForm(forms.ModelForm):
             'title': forms.Textarea(attrs={'cols': 80, 'rows': 20}),}
 
     def clean(self, *args, **kwargs):
+        sys.path.append(os.path.realpath('.'))
+        from utils import parser
+
         cleaned_data = super().clean()
         url = cleaned_data.get('url')
         title = cleaned_data.get('title')
