@@ -1,0 +1,8 @@
+{% for task in tasks %}
+<div class="tasks">
+    <div class="task_counter">{{ forloop.counter }}</div>
+    <ul class="list-group">
+        <li class="list-group-item">Title: {{ task.title }} </br> Date: {{ task.created }}</li>
+    </ul>
+</div>
+{% endfor %}

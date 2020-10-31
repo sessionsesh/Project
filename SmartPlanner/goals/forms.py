@@ -4,7 +4,9 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from .models import *
-from goals import parser
+import os
+import sys
+
 
 class GoalCreateForm(forms.ModelForm):
     class Meta:
@@ -16,17 +18,14 @@ class GoalCreateForm(forms.ModelForm):
             'created',
             'end_date',
         )
-        help_texts = {
-            'title':'Название',
-            'description':'Немного о цели (необязательно)'
-        }
+
         fields = (
             'title',
             'description',
         )
         widgets = {
-            'title': forms.Textarea(attrs={'cols': 100, 'rows': 1}),
-            'description': forms.Textarea(attrs={'cols': 100, 'rows': 20, }),
+            'title': forms.Textarea(attrs={'cols': 100, 'rows': 1, 'class':'goal-title', 'placeholder':'Название'}),
+            'description': forms.Textarea(attrs={'cols': 100, 'rows': 20, 'class':'goal-description', 'placeholder':'Описание'}),
           #  'end_date': forms.DateInput(attrs={'class': 'datefield'}), # TODO: добавить автоматический расчет
         }
 
@@ -64,6 +63,9 @@ class TaskCreateForm(forms.ModelForm):
             'title': forms.Textarea(attrs={'cols': 80, 'rows': 20}),}
 
     def clean(self, *args, **kwargs):
+        sys.path.append(os.path.realpath('.'))
+        from utils import parser
+
         cleaned_data = super().clean()
         url = cleaned_data.get('url')
         title = cleaned_data.get('title')
