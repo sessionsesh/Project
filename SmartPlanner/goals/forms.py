@@ -39,6 +39,7 @@ class GoalCreateForm(forms.ModelForm):
         return goal
 
 
+
 class GoalModelForm(forms.ModelForm):
     name = forms.CharField(label='Название',
                            widget=forms.TextInput( attrs={'class': 'form-control'}))

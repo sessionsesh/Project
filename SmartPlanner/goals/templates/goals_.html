@@ -46,54 +46,56 @@
             margin-left: -15rem;
         }
     }
+
+    .choose-task {
+        width: inherit;
+        height: inherit;
+
+    }
 </style>
-</head>
 
-<body>
-    <div class="d-flex" id="wrapper">
-        <!-- Sidebar -->
-        <div class="bg-light border-right" id="sidebar-wrapper">
-            <div class="sidebar-heading">
-                <h1>Цели </h1>
-                <button class="btn btn-warning" onclick="location.href='{% url 'goals:add_goal' %}'"> + </button>
-            </div>
-            <div class="list-group list-group-flush">
-                {% for goal in goals %}
-                    <a href="{% url 'goals:goal_view' goal.id %}"
-                        class="list-group-item list-group-item-action bg-light">{{ goal.title }}
-                        <span class="badge badge-pill badge-dark" >3</span>
-                    </a>
-                {% endfor %}
-            </div>
+
+
+<div class="d-flex" id="wrapper">
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="sidebar-heading">
+            <h1>Цели </h1>
+            <button class="btn btn-warning" onclick="location.href='{% url 'goals:add_goal' %}'"> + </button>
         </div>
-        <!-- /#sidebar-wrapper -->
-
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
-            </nav>
-            <div class="container-fluid">
-                <h1 class="mt-4">Welcome to the jungle</h1>
-
-                <!-- <p>The starting state of the menu will appear collapsed on smaller screens, and will appear
-                    non-collapsed on larger screens. When toggled using the button below, the menu will change.</p>
-                <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>. The top navbar is
-                    optional, and just for demonstration. Just create an element with the <code>#menu-toggle</code> ID
-                    which will toggle the menu when clicked.</p> -->
-            </div>
+        <div class="list-group list-group-flush">
+            {% for key, values in tasks_counter.items %}
+            <a href="{% url 'goals:goal_view' key %}"
+                class="list-group-item list-group-item-action bg-light">{{ values.0 }}
+                <span class="badge badge-pill badge-dark"> {{ values.1 }} </span>
+            </a>
+            {% endfor %}
         </div>
-        <!-- /#page-content-wrapper -->
     </div>
+    <!-- /#sidebar-wrapper -->
 
-    <script src="../../static/js/jquery.min.js"></script>
-    <script src="../../static/js/bootstrap.bundle.min.js"></script>
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
+        </nav>
+        <div class="container-fluid">
+            <div class="choose-task">
+                <h1>Выберите цель для просмотра её задач</h1>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+</div>
 
-    <!-- Menu Toggle Script -->
-    <script>
-        $("#menu-toggle").click(function (e) {
-            e.preventDefault();
-            $("#wrapper").toggleClass("toggled");
-        });
-    </script>
-    {% endblock %}
+<script src="../../static/js/jquery.min.js"></script>
+<script src="../../static/js/bootstrap.bundle.min.js"></script>
+
+<!-- Menu Toggle Script -->
+<script>
+    $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+</script>
+{% endblock %}

@@ -47,6 +47,9 @@
           <a class="nav-link" href="{% url 'goals:calendar_view' %}">Календарь</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="#">Свободное время</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link disabled" href="#">Профиль</a>
         </li>
         <!-- <li class="nav-item dropdown">
@@ -95,6 +98,7 @@
       </div>
     </div>
   </div>
+</body>
   {% block body %}
 
   {%endblock%}
@@ -103,6 +107,5 @@
   <script src="{% static 'js/bootstrap.bundle.min.js' %} "></script><!-- Не удаляй, это для всплыва -->
   <script src="{% static 'js/main.js' %} "></script><!-- Не удаляй, это для всплыва -->
   {% endblock %}
-</body>
 
 </html>

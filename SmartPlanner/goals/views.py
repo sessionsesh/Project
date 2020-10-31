@@ -7,20 +7,89 @@ from .models import *
 from .forms import *
 from utils.datehelper import *
 
-# TODO: In utils
-def get_month_tasks(month, year, request):
+# Sidebar and it's content
+# Goals in sidebar
+@login_required(login_url='login')
+def goals_view(request):
+    user_id = request.user.id
     goals = list(Goal.objects.filter(owner=request.user))
-    tasks_list = []
+    if len(goals) == 0:
+        goals = []
+
+    tasks_counter = {}
+    # key is goal id
+    # value.1 is goal title
+    # value.2 is count of goal's tasks
     for goal in goals:
         tasks = list(Task.objects.filter(goal=goal))
-        for task in tasks:
-            tasks_list.append(task)
-    return tasks_list
+        tasks_counter[goal.id] = [goal.title, len(tasks)]
+
+    # log
+    print("LOG: ", tasks_counter)
+
+    args = {"goals": goals,
+            "tasks_counter":tasks_counter}
+    return render(request, 'goals_.html', args)
+
+# Goal right from sidebar
+@login_required(login_url='login')
+def goal_view(request, ID):
+    goal = Goal.objects.get(pk=ID)
+    goals = list(Goal.objects.filter(owner=request.user))
+    
+    tasks_counter = {}
+    # key is goal id
+    # value.1 is goal title
+    # value.2 is count of goal's tasks
+    for goal_ in goals:
+        tasks = list(Task.objects.filter(goal=goal_))
+        tasks_counter[goal_.id] = [goal_.title, len(tasks)]
+
+    if request.user == goal.owner:
+        tasks = list(Task.objects.filter(goal=goal))
+        args = {"goals": goals,
+                "goal": goal,
+                "tasks": tasks,
+                "tasks_counter":tasks_counter,
+                }
+        return render(request, 'goals.html', args)
+    else:
+        raise Http404
+
+@login_required(login_url='login')
+def edit_goal_view(request, ID):
+    if request.method == 'POST':
+        goal = Goal.objects(pk=ID)
+        goal_form = GoalCreateForm(instance=goal)
+        if goal_form.is_valid():
+            goal = goal_form.save(request.user)
+            return redirect('/goals')
+    else:
+        goal_form = GoalCreateForm()
+    return render(request, 'add_goal.html', {'project_form': goal_form})
+
+    # goal = Goal.objects.get(pk=ID)
+    # if request.method == 'POST':
+    #     form = GoalModelForm(request.POST, instance=goal)
+    #     if form.is_valid():
+    #         form.save(request.user)
+    #         return redirect('/goals')
+    # else:
+    #     form = GoalCreateForm(instance=goal)
+    # return render(request, 'add_goal.html')
 
 
 @login_required
 def calendar_view(request):
-    user_id = request.user.id
+    def get_month_tasks(month, year, request):  # in utils
+        goals = list(Goal.objects.filter(owner=request.user))
+        tasks_list = []
+        for goal in goals:
+            tasks = list(Task.objects.filter(goal=goal))
+            for task in tasks:
+                tasks_list.append(task)
+        return tasks_list
+        user_id = request.user.id
 
     month = current_month()
     year = current_year()
@@ -34,17 +103,6 @@ def calendar_view(request):
     }
     return render(request, 'calendar.html', args)
 
-
-@login_required(login_url='login')
-def goals_view(request):
-    user_id = request.user.id
-    goals = list(Goal.objects.filter(owner=request.user))
-    if len(goals) == 0:
-        goals = None
-    args = {"goals": goals}
-    return render(request, 'goals_.html', args)
-
-
 @login_required(login_url='login')
 def delete_task(request, ID):
     task = Task.objects.get(pk=ID)
@@ -54,21 +112,6 @@ def delete_task(request, ID):
         return redirect('/goals')
     else:
         raise Http404
-
-
-@login_required(login_url='login')
-def goal_view(request, ID):
-    goal = Goal.objects.get(pk=ID)
-    goals = list(Goal.objects.filter(owner=request.user))
-    if request.user == goal.owner:
-        tasks = list(Task.objects.filter(goal=goal))
-        args = {"goals": goals,
-                "goal": goal,
-                "tasks": tasks}
-        return render(request, 'goals.html', args)
-    else:
-        raise Http404
-
 
 @login_required(login_url='login')
 def add_goal_view(request):
@@ -121,8 +164,3 @@ def add_task_view(request, ID):
             raise Http404
     except Goal.DoesNotExist:
         raise Http404  # TODO: Вы слишком далеко забрались!
-
-
-@login_required(login_url='login')
-def edit_goal_view(request, ID):
-    pass
