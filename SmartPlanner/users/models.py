@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 import uuid
 
-
 class UserManager(models.Manager):
     def validator(self, postData):
         errors = {}
@@ -15,7 +14,6 @@ class UserManager(models.Manager):
 
         if len(postData['password']) < 8:
             errors['password'] = "Password is too short!"
-
         return errors
 
 class Profile(models.Model):

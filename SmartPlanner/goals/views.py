@@ -5,13 +5,19 @@ from django.http import JsonResponse
 from django.template.loader import render_to_string
 from .models import *
 from .forms import *
-from utils.datehelper import *
+
+
+import users
 
 # Sidebar and it's content
 # Goals in sidebar
 @login_required(login_url='login')
 def goals_view(request):
     user_id = request.user.id
+    
+    # test user models in goals app
+    # print(users.models.User.objects.get(pk=user_id).get_profile())
+
     goals = list(Goal.objects.filter(owner=request.user))
     if len(goals) == 0:
         goals = []
@@ -56,50 +62,24 @@ def goal_view(request, ID):
     else:
         raise Http404
 
-@login_required(login_url='login')
-def edit_goal_view(request, ID):
-    if request.method == 'POST':
-        goal = Goal.objects(pk=ID)
-        goal_form = GoalCreateForm(instance=goal)
-        if goal_form.is_valid():
-            goal = goal_form.save(request.user)
-            return redirect('/goals')
-    else:
-        goal_form = GoalCreateForm()
-    return render(request, 'add_goal.html', {'project_form': goal_form})
-
-    # goal = Goal.objects.get(pk=ID)
-    # if request.method == 'POST':
-    #     form = GoalModelForm(request.POST, instance=goal)
-    #     if form.is_valid():
-    #         form.save(request.user)
-    #         return redirect('/goals')
-    # else:
-    #     form = GoalCreateForm(instance=goal)
-    # return render(request, 'add_goal.html')
-
-
 @login_required
 def calendar_view(request):
-    def get_month_tasks(month, year, request):  # in utils
-        goals = list(Goal.objects.filter(owner=request.user))
-        tasks_list = []
-        for goal in goals:
-            tasks = list(Task.objects.filter(goal=goal))
-            for task in tasks:
-                tasks_list.append(task)
-        return tasks_list
-        user_id = request.user.id
+    user_id = request.user.id
 
     month = current_month()
     year = current_year()
 
     month_tasks = get_month_tasks(month, year, request)
+
+    dates = dates_in_month(month, year)
+
+    get_dates_with_tasks(month,year,request)
     args = {
         'current_date': current_date(),
         'days_in_current_month': days_in_month(month, year),
         'first_day_of_week': first_day_of_week(month, year),
         'month_tasks': month_tasks,
+        'dates': dates,
     }
     return render(request, 'calendar.html', args)
 
@@ -122,8 +102,21 @@ def add_goal_view(request):
             return redirect('/goals')
     else:
         goal_form = GoalCreateForm()
-    return render(request, 'add_goal.html', {'project_form': goal_form})
+    return render(request, 'goal_manipulate.html', {'project_form': goal_form})
 
+@login_required(login_url='login')
+def edit_goal_view(request, ID):
+    goal = Goal.objects.get(pk=ID)
+    if request.method == 'POST':
+        goal_form = GoalCreateForm(instance=goal, data=request.POST)
+        if goal_form.is_valid():
+            goal_form.save(request.user) # doesn't need goal.save() because of custo msave in GoalCreateForm
+            return redirect('/goals/{}'.format(ID))
+    else:
+        goal_form = GoalCreateForm(instance=goal)
+    return render(request, 'goal_manipulate.html', {'project_form': goal_form})
+
+from utils.datehelper import *
 
 @login_required(login_url='login')
 def delete_goal(request, ID):  # TODO: сделать выдвигающимся окном
@@ -164,3 +157,20 @@ def add_task_view(request, ID):
             raise Http404
     except Goal.DoesNotExist:
         raise Http404  # TODO: Вы слишком далеко забрались!
+
+@login_required(login_url='login')
+def edit_task_view(request, ID):
+    task = Task.objects.get(pk=ID)
+    if request.user == task.goal.owner:
+        if request.method == 'POST':
+            task_form = TaskCreateForm(instance=task, data=request.POST)
+            if task_form.is_valid():
+                task_form.save(commit=False)
+                task.save()
+                return redirect('/goals')
+        # return redirect("/mygoal/{}".format(str(project.id))) # TODO: на цель пользователя
+        else:
+            task_form = TaskCreateForm(instance = task)
+            return render(request, 'add_task.html', {'project_form': task_form})
+    else:
+        raise Http404

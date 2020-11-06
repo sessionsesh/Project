@@ -19,14 +19,13 @@ class GoalCreateForm(forms.ModelForm):
             'end_date',
         )
 
-        fields = (
+        fields = [
             'title',
             'description',
-        )
+        ]
         widgets = {
             'title': forms.Textarea(attrs={'cols': 100, 'rows': 1, 'class':'goal-title', 'placeholder':'Название'}),
             'description': forms.Textarea(attrs={'cols': 100, 'rows': 20, 'class':'goal-description', 'placeholder':'Описание'}),
-          #  'end_date': forms.DateInput(attrs={'class': 'datefield'}), # TODO: добавить автоматический расчет
         }
 
     def save(self, user, commit=True):
@@ -40,16 +39,16 @@ class GoalCreateForm(forms.ModelForm):
 
 
 
-class GoalModelForm(forms.ModelForm):
-    name = forms.CharField(label='Название',
-                           widget=forms.TextInput( attrs={'class': 'form-control'}))
-    #created = forms.DateField(widget=forms.HiddenInput())
-    description = forms.CharField(widget=forms.HiddenInput())
-    progress = forms.CharField(widget=forms.HiddenInput())
+# class GoalModelForm(forms.ModelForm):
+#     name = forms.CharField(label='Название',
+#                            widget=forms.TextInput( attrs={'class': 'form-control'}))
+#     #created = forms.DateField(widget=forms.HiddenInput())
+#     description = forms.CharField(widget=forms.HiddenInput())
+#     progress = forms.CharField(widget=forms.HiddenInput())
 
-    class Meta():
-        model = Goal
-        fields = ('title', 'description','progress')
+#     class Meta():
+#         model = Goal
+#         fields = ('title', 'description','progress')
 
 class TaskCreateForm(forms.ModelForm):
     class Meta:

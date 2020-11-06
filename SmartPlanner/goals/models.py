@@ -23,12 +23,15 @@ class Task(models.Model):
     title = models.TextField(blank=True)
     created = models.DateTimeField(auto_now_add=True, verbose_name='date_created', editable=False)
     goal = models.ForeignKey(Goal, on_delete=models.CASCADE, blank=False)
-    is_finished = models.BooleanField(verbose_name='is_finished', default=False)
-    #duration = models.IntegerField(verbose_name='Duration', blank = False, editable = False)
+    is_finished = models.BooleanField(verbose_name='task_is_finished', default=False)
 
-    def save(self, *args, **kwargs):
-        if self.url !='' and Task.objects.filter(url=self.url):#не сохраняем url два раза
-            raise ValueError
-        else:
-            super().save(*args, **kwargs)
+
+    beg_datetime = models.DateTimeField(null=True, editable= True, verbose_name='begin_datetime')
+    end_datetime = models.DateTimeField(null=True, editable= True, verbose_name='end_datetime')
+
+    # def save(self, *args, **kwargs):
+    #     if self.url !='' and Task.objects.filter(url=self.url):#не сохраняем url два раза
+    #         raise ValueError
+    #     else:
+    #         super().save(*args, **kwargs)
 

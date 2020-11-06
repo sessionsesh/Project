@@ -54,8 +54,6 @@
     }
 </style>
 
-
-
 <div class="d-flex" id="wrapper">
     <!-- Sidebar -->
     <div class="bg-light border-right" id="sidebar-wrapper">
@@ -67,7 +65,7 @@
             {% for key, values in tasks_counter.items %}
             <a href="{% url 'goals:goal_view' key %}"
                 class="list-group-item list-group-item-action bg-light">{{ values.0 }}
-                <span class="badge badge-pill badge-dark"> {{ values.1 }} </span>
+                <span class="badge badge-pill badge-primary"> {{ values.1 }} </span>
             </a>
             {% endfor %}
         </div>

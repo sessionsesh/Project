@@ -19,17 +19,18 @@
 
     <!-- TODO: add control several tasks per day -->
     <div class="date-grid">
-        {% for task in month_tasks %}
+        <!-- {% for task in month_tasks %}
         <div class="grid-cell">
             <div class="number">{{ forloop.counter }}</div>
             <ul>
                 <li>{{ task.title }}</li>
             </ul>
         </div>
-        {% endfor %}
+        {% endfor %} -->
 
+        {% for day in dates %}
         <div class="grid-cell">
-            <div class="number">EXAMPLE</div>
+            <div class="number">{{ day }}</div>
             <ul>
                 <li><button><strike>LoR</strike></button></li>
                 <li><button>Do Exercises</button></li>
@@ -39,11 +40,15 @@
 
             </ul>
         </div>
+        {% endfor %}
+
+        
     </div>
     <div class="today">
         Сегодня {{ current_date }}
     </br>
         Дней в текущем месяце: {{ days_in_current_month }}
     </div>
+        Первый день первой недели месяца: {{ first_day_of_week }}
 </div>
 {% endblock %}

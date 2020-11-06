@@ -61,7 +61,7 @@
             {% for key, values in tasks_counter.items %}
             <a href="{% url 'goals:goal_view' key %}"
                 class="list-group-item list-group-item-action bg-light">{{ values.0 }}
-                <span class="badge badge-pill badge-dark"> {{ values.1 }} </span>
+                <span class="badge badge-pill badge-primary"> {{ values.1 }} </span>
             </a>
             {% endfor %}
         </div>
@@ -84,7 +84,6 @@
             <button class="btn btn-primary " data-toggle="modal" data-target="#inquiryModal">Добавить задачу</button>
 
             {% include 'goal_tasks.html' %}
-
 
             <!--  Modal Task -->
             <div class="modal fade" id="inquiryModal" role="dialog">

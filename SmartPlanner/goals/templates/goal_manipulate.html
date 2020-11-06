@@ -1,18 +1,8 @@
 {% extends 'base.html' %}
-{% load static %}
 {% block title %}
 <title>Новая цель</title>
 {% endblock %}
 {% block body %}
-<style>
-    .goal-title{
-        background-color: wheat;
-    }
-    .goal-description{
-
-    }
-
-</style>
 <div class="site-wrapper" style="margin-top:75px;">
     <div class="text-center">
         <h1>Отлично, давайте поставим цель</h1>
@@ -21,7 +11,6 @@
                 <table>
                     {% csrf_token %}
                     {% for field in project_form %}
-                    {{ field.help_text}}
                     {{ field }}
                     {% endfor %}
                 </table>

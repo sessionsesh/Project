@@ -3,20 +3,13 @@
   <div class="task_counter">{{ forloop.counter }}</div>
   <ul class="list-group">
     <li class="list-group-item">
-      Link: {{ task.url }} </br>
+      Link: <a href="{{ task.url }}"> {{ task.url }} </a> </br>
       Title: {{ task.title }} </br> 
       Date: {{ task.created }}
-      <a href="{% url 'goals:delete_task' task.id %}">
-        <button type="button" class="btn btn-danger btn-sm">Удалить</button>
-      </a>
-      <a href="#">
-        <button type="button" class="btn btn-primary btn-sm">Редактировать</button>
-      </a>
-      <a href="#">
-        <button type="button" class="btn btn-success btn-sm">Выполнено</button>
-      </a>
+      <a class="btn btn-danger" type="button" href="{% url 'goals:delete_task' task.id %}">Удалить</a>
+      <a class="btn btn-secondary" type="button" href="{% url 'goals:edit_task' task.id  %}">Редактировать</a>
+      <a class="btn btn-success" type="button" href="#">Выполнено</a>
     </li>
-
   </ul>
 </div>
 {% endfor %}

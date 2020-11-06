@@ -1,23 +1,58 @@
-from datetime import datetime
+from datetime import datetime as dt
+import datetime
 from calendar import monthrange
+from goals.models import *
 
-# monthrange(year, month)
-# Returns weekday of first day of the month and number of days in month, for the specified year and month.
-
+# DATETIME API
 def current_date():
-    return datetime.today().strftime("%d/%m/%Y")
+    return dt.today()
 
 def current_day():
-    return datetime.today().strftime("%d")
+    return dt.today().day
 
 def current_month():
-    return datetime.today().strftime("%m")
+    return dt.today().month
 
 def current_year():
-    return datetime.today().strftime("%Y")
+    return dt.today().year
 
 def days_in_month(month, year):
     return monthrange(int(year), int(month))[1]
 
 def first_day_of_week(month, year):
-    return monthrange(int(year), int(month))[0]
+    """ Retrun first weekday of month """
+    weekday_digit = monthrange(int(year), int(month))[0]
+    dict_digit_day = {0: 'Monday', 1: 'Tuesday', 2: 'Wednesday', 3: 'Thursday', 4: 'Friday', 5: 'Saturday', 6: 'Sunday'}
+    return dict_digit_day[weekday_digit]
+    
+def dates_in_month(month, year):
+    """ Retrun list of dates in month """
+    days_counter = days_in_month(month, year)
+    days = [datetime.date(year, month, day) for day in range(1, days_counter + 1)]
+    return days
+
+
+# UTILS FOR CALENDAR
+def get_month_tasks(month, year, request):
+        """ Return tasks for month """
+        goals = list(Goal.objects.filter(owner=request.user))
+        tasks_list = []
+        for goal in goals:
+            tasks = list(Task.objects.filter(goal=goal))
+            for task in tasks:
+                tasks_list.append(task)
+        return tasks_list
+
+def get_dates_with_tasks(month, year, request):
+    """ Return dictionary like this: {date_1:[task_1, task_2], etc.} """
+    tasks = {}
+    month_tasks = get_month_tasks(month, year, request)
+    month_dates = dates_in_month(month, year)
+    for date in month_dates:
+        tasks_list = []
+        for task in month_tasks:
+            print(task._meta.get_field('created').value_from_object(task).strftime('%m')) # return value for selected model field
+            if date == task._meta.get_field('beg_datetime').value_from_object(task):
+                tasks_list.append(task)
+        tasks[date] = tasks_list
+    return tasks
