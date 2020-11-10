@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users',
-    'goals'
+    'goals',
+    'utils',
 ]
 
 MIDDLEWARE = [
@@ -80,8 +81,8 @@ WSGI_APPLICATION = 'SmartPlanner.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'database',
-        'USER': 'postgres',
+        'NAME': 'mega_server',
+        'USER': 'admin',
         'PASSWORD': 'password',
         'HOST': 'localhost',
         'PORT': '5432',

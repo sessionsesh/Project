@@ -35,7 +35,7 @@ def login_view(request):
         if user is not None:
             login(request, user)
             messages.success(request, 'Добро пожаловать!')
-            return redirect('/mypage') #TODO: перенаправлять в личный кабинет
+            return redirect('/goals') #TODO: перенаправлять в личный кабинет
     return render(request, 'login.html', {'form': user_form})
 
 

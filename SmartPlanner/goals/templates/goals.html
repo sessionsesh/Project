@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<style>
+    #wrapper {
+        overflow-x: hidden;
+    }
+
+    #sidebar-wrapper {
+        min-height: 100vh;
+        margin-left: -15rem;
+        -webkit-transition: margin .25s ease-out;
+        -moz-transition: margin .25s ease-out;
+        -o-transition: margin .25s ease-out;
+        transition: margin .25s ease-out;
+    }
+
+    #sidebar-wrapper .sidebar-heading {
+        padding: 0.875rem 1.25rem;
+        font-size: 1.2rem;
+    }
+
+    #sidebar-wrapper .list-group {
+        width: 15rem;
+    }
+
+    #page-content-wrapper {
+        min-width: 100vw;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: 0;
+    }
+
+    @media (min-width: 768px) {
+        #sidebar-wrapper {
+            margin-left: 0;
+        }
+
+        #page-content-wrapper {
+            min-width: 0;
+            width: 100%;
+        }
+
+        #wrapper.toggled #sidebar-wrapper {
+            margin-left: -15rem;
+        }
+    }
+</style>
+
+
+
+<div class="d-flex" id="wrapper">
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="sidebar-heading">
+            <h1>Цели </h1>
+            <button class="btn btn-warning" onclick="location.href='{% url 'goals:add_goal' %}'"> + </button>
+        </div>
+        <div class="list-group list-group-flush">
+            {% for key, values in tasks_counter.items %}
+            <a href="{% url 'goals:goal_view' key %}"
+                class="list-group-item list-group-item-action bg-light">{{ values.0 }}
+                <span class="badge badge-pill badge-primary"> {{ values.1 }} </span>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
+        </nav>
+        <div class="container-fluid">
+            <div class="container">
+            </div>
+            <h1 class="mt-4">Задачи "{{ goal.title }}"</h1>
+            Описание: {{ goal.description }}<br/>
+            Создана: {{ goal.created }}
+            <a class="btn btn-warning" href="{% url 'goals:edit_goal' goal.id %}" type="button">Редактировать</a>
+            <a class="btn btn-danger" href="{% url 'goals:delete_goal' goal.id %}" role="button">Удалить</a>
+            <button class="btn btn-primary " data-toggle="modal" data-target="#inquiryModal">Добавить задачу</button>
+
+            {% include 'goal_tasks.html' %}
+
+            <!--  Modal Task -->
+            <div class="modal fade" id="inquiryModal" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="inquiryModalLabel">Добавить задачу</h5>
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span>&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <form action="{% url 'goals:add_task' goal.id%}" method="POST">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="url" class="col-form-label">Ссылка</label>
+                                    <input type="text" name="url" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="title" class="col-form-label">Описание:</label>
+                                    <input type="text" name="title" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="title" class="col-form-label">Описание(Изменить на
+                                        длительность):</label>
+                                    <input type="text" name="phone" class="form-control">
+                                </div>
+                                <hr>
+                                <input type="submit" value="Сохранить" class="btn btn-block btn-secondary">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+</div>
+
+<script src="../../static/js/jquery.min.js"></script>
+<script src="../../static/js/bootstrap.bundle.min.js"></script>
+
+<!-- Menu Toggle Script -->
+<script>
+    $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+</script>
+{% endblock %}

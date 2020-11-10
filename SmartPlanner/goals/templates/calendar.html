@@ -1,83 +1,54 @@
-<!DOCTYPE html>
-<head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="../static/css/calendar_style.css">
-</head>
+{% extends 'base.html' %}
+{% block title%} Календарь {% endblock %}
+{% block body %}
 
-<body>
-    <div class="calendar">
-        <div class="day-of-week">
-            <div>Monday</div>
-            <div>Tuesday</div>
-            <div>Wednesday</div>
-            <div>Thursday</div>
-            <div>Friday</div>
-            <div>Sunday</div>
-            <div>Saturday</div>
-        </div>
+{% block head %}
+<link href="../static/css/calendar.css" rel="stylesheet" />
+{% endblock %}
 
-        <div class="date-grid">
-            <div class="grid-cell">
-                <div class="number">1</div>
-                <div>
-                    <div>Nothing to do</div>
-                </div>
-            </div>
-
-            <div class="grid-cell">
-                <div class="number">2</div>
-                <ul>
-                    <li><button><strike>LoR</strike></button></li>
-                    <li><button><strike>Read about Compliers</strike></button></li>
-                </ul>
-            </div>
-
-            <div class="grid-cell">
-                <div class="number">3</div>
-                <ul>
-                    <li><button><strike>LoR</strike></button></li>
-                    <li><button>Do Exercises</button></li>
-                    <li><button><strike>Read about Compliers</strike></button></li>
-                    <li><button>Don't be retarted </button></li>
-                    <li><button>Don't be retarted </button></li>
-
-                </ul>
-            </div>
-
-
-            <div class="grid-cell">
-                <div class="number">4</div>
-                <div>Nothing to do</div>
-            </div>
-            <div class="grid-cell">
-                <div class="number">5</div>
-                <div>Nothing to do</div>
-            </div>
-            <div class="grid-cell">
-                <div class="number">6</div>
-                <div>Nothing to do</div>
-            </div>
-            <div class="grid-cell">
-                <div class="number">7</div>
-                <div>Nothing to do</div>
-            </div>
-            <div class="grid-cell">
-                <div class="number">8</div>
-                <div>Nothing to do</div>
-            </div>
-            <div class="grid-cell">
-                <div class="number">9</div>
-                <div>Nothing to do</div>
-            </div>
-            <div class="grid-cell">
-                <div class="number">10</div>
-                <div>Nothing to do</div>
-            </div>
-            <div class="grid-cell">
-                <div class="number">11</div>
-                <div>Nothing to do</div>
-            </div>
-
-        </div>
+<div class="calendar">
+    <div class="day-of-week">
+        <div>Понедельник</div>
+        <div>Вторник</div>
+        <div>Среда</div>
+        <div>Четверг</div>
+        <div>Пятница</div>
+        <div>Суббота</div>
+        <div>Воскресенье</div>
     </div>
-</body>
+
+    <!-- TODO: add control several tasks per day -->
+    <div class="date-grid">
+        <!-- {% for task in month_tasks %}
+        <div class="grid-cell">
+            <div class="number">{{ forloop.counter }}</div>
+            <ul>
+                <li>{{ task.title }}</li>
+            </ul>
+        </div>
+        {% endfor %} -->
+
+        {% for day in dates %}
+        <div class="grid-cell">
+            <div class="number">{{ day }}</div>
+            <ul>
+                <li><button><strike>LoR</strike></button></li>
+                <li><button>Do Exercises</button></li>
+                <li><button><strike>Read about Compliers</strike></button></li>
+                <li><button>Don't be retarted </button></li>
+                <li><button>Don't be retarted </button></li>
+
+            </ul>
+        </div>
+        {% endfor %}
+
+        
+    </div>
+    <div class="today">
+        Сегодня {{ current_date }}
+    </br>
+        Дней в текущем месяце: {{ days_in_current_month }}
+    </div>
+        Первый день первой недели месяца: {{ first_day_of_week }}
+</div>
+{% endblock %}
