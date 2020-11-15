@@ -1,2 +1,2 @@
-__all__ = ('parser','datehelper')
+__all__ = ('parser','datehelper', 'mailing')
 

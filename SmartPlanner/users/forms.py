@@ -1,20 +1,16 @@
 from django import forms
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib import messages
-from .models import Profile
+from .models import Profile, EmailConfirmation
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate
 
-class UserRegisterForm(forms.ModelForm):
+class UserRegisterForm(forms.Form):
     login = forms.CharField(label='Логин',widget=forms.TextInput(attrs={'class': 'form-control'}))
     email = forms.CharField(widget=forms.TextInput(attrs={ 'class': 'form-control'}))
     password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class':'form-control'}))
     password_2 = forms.CharField(label='Повторите пароль',widget=forms.TextInput(attrs={'class':'form-control'}))
 
-
-    class Meta:
-        model = Profile
-        fields = ('login',)
 
     def clean(self, *args, **kwargs): # проверка зависящих друг от друга полей
         cleaned_data = super().clean()
@@ -28,16 +24,20 @@ class UserRegisterForm(forms.ModelForm):
                 print('Go fuck yourself')
                 raise forms.ValidationError(
                 'Пароли не совпадают!'            )
-            users = Profile.objects.filter(email=self.cleaned_data.get("email"))
+            users = User.objects.filter(email=self.cleaned_data["email"])
             if len(users) > 0:
                 raise forms.ValidationError("Пользователь с таким email-адресом уже зарегистрирован")
         except KeyError:
             raise forms.ValidationError("Не все поля заполнены")
 
     def save(self):
-        _user = User.objects.create_user(username=self.cleaned_data.get('login'),password=self.cleaned_data.get('password'))
+        email = self.cleaned_data.get('email')
+        _user = User.objects.create_user(username=self.cleaned_data.get('login'),password=self.cleaned_data.get('password'), email=email)
         _user.save()
-        user = Profile.objects.create(user=_user, email=self.cleaned_data.get('email'))
+       # user = Profile.objects.create(user=_user, email=email, verified=False)
+        # user.save()
+        user = Profile.objects.create(user=_user, verified=False)
+        email = EmailConfirmation.objects.create(user=user, email_adress=email)  # создаем и сразу сохраняем
         user.save()
         return user
 
@@ -57,6 +57,9 @@ class UserLoginForm(forms.Form):
             except ValueError:
                 self.authed_user = None
             if self.authed_user:
+                confs = EmailConfirmation.objects.filter(email_adress = self.authed_user.email)
+                if confs.count()>0:
+                    raise forms.ValidationError("Подтвердите, пожалуйста, адрес электронной почты")
                 #return self.cleaned_data
                 return super(UserLoginForm, self).clean(*args, **kwargs)
         except KeyError:
@@ -99,6 +102,7 @@ class PasswordResetForm(forms.Form):
         if commit:
             self.user.save()
         return self.user
+
 '''
 
 class DisconnectForm(forms.Form):

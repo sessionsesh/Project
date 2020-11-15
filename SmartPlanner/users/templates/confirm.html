@@ -1,0 +1,22 @@
+{% extends "base_page.html" %}
+
+{% block title %}Подтверждение email{% endblock %}
+
+{% block content %}
+ <div class="loginForm">
+  <h1>Подтверждение email</h1>
+  <hr>
+
+  <form method="POST">
+    {% csrf_token %}
+    {% if confirmed %}
+      <div class="allText">Адрес подтвержден!</div>
+      {% else %}
+      <div class="allText">Некорректная ссылка</div>
+      {% endif %}
+    <a href="{% url 'login'%}">
+        <div class="header_item headerButton" id="login">Ok</div></a>
+  </form>
+</div>
+</div>
+{% endblock %}

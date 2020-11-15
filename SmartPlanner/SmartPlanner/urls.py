@@ -12,6 +12,7 @@ urlpatterns = [
     path('register', uviews.register_view, name='register'),
     path('login', uviews.login_view, name='login'),
     path('reset', uviews.reset_password_view, name='reset_password'),
+    path('confirm/<key_ref>', uviews.confirm_view, name='confirm'),
 
     # path('mypage', gviews.main_view, name = 'my goals'),
     # path('add', gviews.add_goal_view, name = 'add_goal'),

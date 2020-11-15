@@ -131,3 +131,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+DEFAULT_FROM_EMAIL = 'smartplanner'
+EMAIL_HOST_USER = 'yourssmartplanner@gmail.com'
+EMAIL_HOST_PASSWORD = 'superpassword'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

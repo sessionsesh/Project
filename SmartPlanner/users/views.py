@@ -62,4 +62,17 @@ def reset_password_view(request):
     args = {'form': reset_form}
     return render(request, 'change_password.html', args)
 
+def confirm_view(request, key_ref):
+    confirmation = EmailConfirmation.objects.filter(key_ref=key_ref)
+    length = confirmation.count()
+    args = {'confirmed':False}
+    for i in range(length):
+        conf = confirmation[i]
+        if not conf.key_expired():
+            args['confirmed'] = True
+            conf.confirm()
+            break
+    return render(request, 'confirm.html',args)
+
+
 
