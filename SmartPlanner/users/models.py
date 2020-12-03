@@ -37,14 +37,7 @@ class EmailConfirmation(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     email_adress = models.EmailField(max_length=200, unique=True, primary_key=True)
     key_ref = models.CharField(max_length=64, unique=True)
-    sent = models.DateTimeField(blank=True)
-
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        if not self.sent:
-            self.key_ref = mailing.generate_ref()
-            self.send()
+    sent = models.DateTimeField(null=True)
 
 
     def key_expired(self):
@@ -58,15 +51,26 @@ class EmailConfirmation(models.Model):
             self.delete() # СУЕЦЫД - объект удаляется
 
     def send(self, **kwargs):
-        current_site = "127.0.0.1:8000" # пока так
-        #current_site = kwargs["site"] if "site" in kwargs else Site.objects.get_current()
-        # protocol = getattr(settings, "DEFAULT_HTTP_PROTOCOL", "http")
-        protocol = "http"
-        #code = urlencode({"code": self.key_ref})
-        code = self.key_ref
-        signup_url = f"{protocol}://{current_site}/confirm/{code}"
-        #signup_url = f"{protocol}://{current_site.domain}confirm?{code}"
-        ctx = {'url': signup_url}
+        self.key_ref = mailing.generate_ref()
+        ctx = mailing.generate_context(self.key_ref, type='confirm')
         mailing.send_confirmation_email(self.email_adress, ctx)
         self.sent = timezone.now()
         self.save()
+
+
+class PasswordChangeConfirmation(models.Model):
+    key_ref = models.CharField(max_length=64, unique=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    def __init__(self,*args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.key_ref = mailing.generate_ref()
+
+    def send(self):
+        email = self.user.email
+        ctx = mailing.generate_context(self.key_ref, type='change')
+        mailing.send_password_change_email(email, ctx)
+        self.save()
+
+    def confirm(self):
+        self.delete()
