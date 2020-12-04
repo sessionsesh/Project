@@ -25,13 +25,4 @@ class Task(models.Model):
     goal = models.ForeignKey(Goal, on_delete=models.CASCADE, blank=False)
     is_finished = models.BooleanField(verbose_name='task_is_finished', default=False)
 
-
-    beg_datetime = models.DateTimeField(null=True, editable= True, verbose_name='begin_datetime')
-    end_datetime = models.DateTimeField(null=True, editable= True, verbose_name='end_datetime')
-
-    # def save(self, *args, **kwargs):
-    #     if self.url !='' and Task.objects.filter(url=self.url):#не сохраняем url два раза
-    #         raise ValueError
-    #     else:
-    #         super().save(*args, **kwargs)
-
+    duration = models.IntegerField(null=True ,verbose_name='duration')

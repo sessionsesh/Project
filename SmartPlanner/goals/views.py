@@ -62,27 +62,6 @@ def goal_view(request, ID):
     else:
         raise Http404
 
-@login_required
-def calendar_view(request):
-    user_id = request.user.id
-
-    month = current_month()
-    year = current_year()
-
-    month_tasks = get_month_tasks(month, year, request)
-
-    dates = dates_in_month(month, year)
-
-    get_dates_with_tasks(month,year,request)
-    args = {
-        'current_date': current_date(),
-        'days_in_current_month': days_in_month(month, year),
-        'first_day_of_week': first_day_of_week(month, year),
-        'month_tasks': month_tasks,
-        'dates': dates,
-    }
-    return render(request, 'calendar.html', args)
-
 @login_required(login_url='login')
 def delete_task(request, ID):
     task = Task.objects.get(pk=ID)
@@ -148,7 +127,7 @@ def add_task_view(request, ID):
                     messages.error(request,  "Проверьте корректность ссылки! ")
                     tasks = list(Task.objects.filter(goal=goal))
                     args = {"goal": goal, "tasks": tasks}
-                    return render(request, 'goal_view.html', args)
+                    return render(request, 'error.html', args)
            # return redirect("/mygoal/{}".format(str(project.id))) # TODO: на цель пользователя
             else:
                 task_form = TaskCreateForm()

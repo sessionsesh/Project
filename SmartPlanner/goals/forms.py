@@ -39,30 +39,18 @@ class GoalCreateForm(forms.ModelForm):
             goal.save()
         return goal
 
-
-
-# class GoalModelForm(forms.ModelForm):
-#     name = forms.CharField(label='Название',
-#                            widget=forms.TextInput( attrs={'class': 'form-control'}))
-#     #created = forms.DateField(widget=forms.HiddenInput())
-#     description = forms.CharField(widget=forms.HiddenInput())
-#     progress = forms.CharField(widget=forms.HiddenInput())
-
-#     class Meta():
-#         model = Goal
-#         fields = ('title', 'description','progress')
-
 class TaskCreateForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ('url', 'title')
+        fields = ('url', 'title', 'duration')
         exclude = {'owner',
                    'created',
                    'goal',
                    'is_finihed'}
         widgets = {
             'url': forms.Textarea(attrs={'cols': 80, 'rows': 1}),
-            'title': forms.Textarea(attrs={'cols': 80, 'rows': 20}),}
+            'title': forms.Textarea(attrs={'cols': 80, 'rows': 20}),
+            'duration': forms.IntegerField()}
 
     def clean(self, *args, **kwargs):
         sys.path.append(os.path.realpath('.'))

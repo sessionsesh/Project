@@ -1,7 +1,6 @@
 from datetime import datetime as dt
 import datetime
 from calendar import monthrange
-from goals.models import *
 
 # DATETIME API
 def current_date():

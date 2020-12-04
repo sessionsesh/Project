@@ -3,110 +3,97 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <style type="text/css">
-    body {
-      margin-top: 50px;
-      background-color: #f1f1f1;
-    }
 
-    .head {
-      padding: 5px 15px;
-      border-radius: 3px 3px 0px 0px;
-    }
 
-    .to-hide {
-      display: none;
-    }
+    <style type="text/css">
+        body {
+            margin-top: 50px;
+            background-color: #f1f1f1;
+        }
 
-  </style>
-  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}"/>
+        .head {
+            padding: 5px 15px;
+            border-radius: 3px 3px 0px 0px;
+        }
+
+        .to-hide {
+            display: none;
+        }
+    </style>
+    {% block css%}
+    {%endblock%}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">
-      <img src="{% static 'img/brand.png' %}" width="30" height="30" alt="">
-    </a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'img/brand.png' %}" width="30" height="30" alt="">
+        </a>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <!-- active -->
-          <a class="nav-link" href="{% url 'goals:goals_view' %}">Главная<span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'goals:calendar_view' %}">Календарь</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Свободное время</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Профиль</a>
-        </li>
-
-        <!-- <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li> -->
-        <!-- <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
-        </li> -->
-      </ul>
-      <!-- <form class="form-inline my-2 my-lg-0">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'goals:goals_view' %}">Главная<span
+                            class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'schedule:calendar_view' %}">Календарь</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'schedule:add_free_time' %}">Свободное время</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Профиль</a>
+                </li>
+            </ul>
+            <!-- <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form> -->
-    </div>
-  </nav>
-
-
-  <div class="container my-4 to-hide">
-    <div class="row">
-      <div class="col-md-8 mx-auto">
-        {% if messages %}
-        {% for message in messages %}
-        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-        <div class="alert alert-danger messages">
-          <span{% if message.tags %} class="{{ message.tags }}" {% endif %}>
-            Ошибка {{ message }}<br />
-            </span>
         </div>
-        {%else %}
-        <div class="alert alert-success messages">
-          <span{% if message.tags %} class="{{ message.tags }}" {% endif %}>
-            {{ message }}<br />
-            </span>
+    </nav>
+
+    {% block body %}
+
+    {%endblock%}
+    <div class="container my-4 to-hide">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                {% if messages %}
+                {% for message in messages %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                <div class="alert alert-danger messages">
+                    <span{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                        Ошибка {{ message }}<br />
+                        </span>
+                </div>
+                {%else %}
+                <div class="alert alert-success messages">
+                    <span{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                        {{ message }}<br />
+                        </span>
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+            </div>
         </div>
-        {% endif %}
-        {% endfor %}
-        {% endif %}
-      </div>
     </div>
-  </div>
 </body>
-  {% block body %}
-
-  {%endblock%}
-  {% block javascript %}
-  <script src="{% static 'js/jquery.min.js' %} "></script> <!-- Не удаляй, это для всплыва -->
-  <script src="{% static 'js/bootstrap.bundle.min.js' %} "></script><!-- Не удаляй, это для всплыва -->
-  <script src="{% static 'js/main.js' %} "></script><!-- Не удаляй, это для всплыва -->
-  {% endblock %}
+{% block javascript %}
+<script src="{% static 'js/jquery.min.js' %} "></script> <!-- Не удаляй, это для всплыва -->
+<script src="{% static 'js/bootstrap.bundle.min.js' %} "></script><!-- Не удаляй, это для всплыва -->
+<script src="{% static 'js/main.js' %} "></script><!-- Не удаляй, это для всплыва -->
+{% endblock %}
 
 </html>

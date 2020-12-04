@@ -1,15 +1,19 @@
 import datetime
-from .models import FreeTimeSchedule
+from .models import FreeTime
 from goals.models import Task, Goal
-import utils
+from utils import datehelper
+
+
+# TODO: Изменить функции с перспективы FreeTime
+# То есть идём по списку из элементов FreeTime, если beg_datetime == iteration.current_datetime
 
 # UTILS FOR CALENDAR
 def get_all_tasks(month, year, user):
         """ Return tasks for month """
-        goals = list(Goal.objects.filter(owner=user))
+        goals = list(FreeTime.objects.filter(owner=user))
         tasks_list = []
-        for goal in goals:
-            tasks = list(Task.objects.filter(goal=goal,is_finished=False))
+        for each in goals:
+            tasks = list(Task.objects.filter(goal=goal, is_finished=False))
             for task in tasks:
                 tasks_list.append(task)
         return tasks_list
@@ -18,8 +22,8 @@ def get_all_tasks(month, year, user):
 def get_dates_with_tasks(month, year, user):
     """ Return dictionary like this: {date_1:[task_1, task_2], etc.} """
     tasks = {}
-    month_tasks = get_all_tasks(month, user)
-    month_dates = utils.dates_in_month(month, year)
+    month_tasks = get_all_tasks(month, year, user)
+    month_dates = datehelper.dates_in_month(month, year)
     for date in month_dates:
         tasks_list = []
         for task in month_tasks:
@@ -30,4 +34,4 @@ def get_dates_with_tasks(month, year, user):
     return tasks
 
 def create_schedule(user, day):
-    free_time = FreeTimeSchedule.objects.filter(user=user)[0]
+    free_time = FreeTime.objects.filter(user=user)[0]
