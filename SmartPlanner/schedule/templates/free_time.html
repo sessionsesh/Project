@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block css%}
+<style>
+    .add-info {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<ul class="list-group">
+
+
+    {% for freetime in free_time_list %}
+        <li class="list-group-item">
+            <div>beg: {{ freetime.beg_datetime }}</div>
+            <div>end: {{ freetime.end_datetime }}</div>
+            <div>task: {{ freetime.task }}</div>
+        </li>
+    {% endfor %}
+
+    <li class="list-group-item">
+        <div class="add_freetime">
+            <form action="{% url 'schedule:add_free_time' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="beg_datetime" class="col-form-label">Начало: </label>
+                    <input type="datetime-local" name="beg_datetime" />
+                </div>
+                <div class="form-group">
+                    <label for="end_datetime" class="col-form-label">Длительность: </label>
+                    <input type="datetime-local" name="end_datetime" />
+                    <!-- Изменить FreeTime.end_datetime на duration и раскоментить нижний строки -->
+                    <!-- <input type="range" name="duration" class="form-control" min="30" , max="300"
+                        name="duration" oninput="this.nextElementSibling.value = this.value;">
+                    <output>0</output> <span>minute(s)</span> -->
+                </div>
+                <input type="submit" value="Добавить" class="btn btn-block btn-secondary">
+            </form>
+        </div>
+    </li>
+
+
+</ul>
+
+<script>
+    function declOfNum(value, words) {
+        value = Math.abs(value) % 100;
+        var num = value % 10;
+        if (value > 10 && value < 20) return words[2];
+        if (num > 1 && num < 5) return words[1];
+        if (num == 1) return words[0];
+        return words[2];
+    }
+    console.log(declOfNum(24, ['минута', 'минуты', 'минут']))
+</script>
+
+{% endblock %}
