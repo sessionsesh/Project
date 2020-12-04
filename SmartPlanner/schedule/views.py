@@ -14,7 +14,6 @@ from schedule.engine import *
 @login_required
 def add_free_time(request):
     user_id = request.user.id
-    print("TEMP_DEBUG", user_id)
     if request.method == 'POST':
         free_time_form = FreeTimeCreateForm(request.POST)
         if free_time_form.is_valid():
@@ -31,6 +30,14 @@ def add_free_time(request):
                 'free_time_list': free_time_list}
         return render(request, 'free_time.html', args)
 
+@login_required
+def delete_free_time(request, ID):
+    ft = FreeTime.objects.get(pk=ID)    # ft means freetime
+    if request.user == ft.owner:
+        ft.delete()
+        return redirect('/freetime')
+    else:
+        raise Http404
 
 @login_required
 def calendar_view(request):

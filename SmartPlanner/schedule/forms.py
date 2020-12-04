@@ -12,10 +12,10 @@ class FreeTimeCreateForm(forms.ModelForm):
 
         fields = [
             'beg_datetime',
-            'end_datetime'
+            'duration'
         ]
 
         widgets = {
             'beg_datetime': forms.DateTimeInput(format='%d/%m/%Y %H:%M'),
-            'end_datetime': forms.DateTimeInput(format='%d/%m/%Y %H:%M'),
+            'duration': forms.NumberInput(),
         }
