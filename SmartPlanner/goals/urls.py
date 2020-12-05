@@ -13,4 +13,5 @@ urlpatterns = [
     path('delete_task/<ID>', gviews.delete_task, name = 'delete_task'),
     path('show_tasks/<ID>', gviews.delete_goal, name = 'tasks_view'),
     path('task/edit/<ID>', gviews.edit_task_view, name='edit_task'),
+    path('task/complete/<ID>', gviews.complete_task, name="complete_task")
 ]

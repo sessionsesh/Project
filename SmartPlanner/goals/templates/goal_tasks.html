@@ -5,10 +5,11 @@
     <li class="list-group-item">
       Link: <a href="{{ task.url }}"> {{ task.url }} </a> </br>
       Title: {{ task.title }} </br> 
-      Date: {{ task.created }}
+      Date: {{ task.created }} </br> 
+      In_Process: {{ task.in_process}}</br> 
       <a class="btn btn-danger" type="button" href="{% url 'goals:delete_task' task.id %}">Удалить</a>
       <a class="btn btn-secondary" type="button" href="{% url 'goals:edit_task' task.id  %}">Редактировать</a>
-      <a class="btn btn-success" type="button" href="#">Выполнено</a>
+      <a class="btn btn-success" type="button" href="{% url 'goals:complete_task' task.id %}"> {{ task.is_finished }} </a>
     </li>
   </ul>
 </div>

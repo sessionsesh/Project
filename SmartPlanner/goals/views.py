@@ -37,6 +37,21 @@ def goals_view(request):
             "tasks_counter":tasks_counter}
     return render(request, 'goals_.html', args)
 
+
+# Если задача выполнена, тогда делает её невыполненной и наоборот
+@login_required
+def complete_task(request, ID):
+    print(request.method)
+    task = Task.objects.get(pk=ID)
+    if task.is_finished == False:
+        task.is_finished = True
+    else: 
+        task.is_finished = False
+    task.save()
+    return redirect(f'/goals/{task.goal.id}')
+
+
+
 # Goal right from sidebar
 @login_required(login_url='login')
 def goal_view(request, ID):
@@ -62,15 +77,7 @@ def goal_view(request, ID):
     else:
         raise Http404
 
-@login_required(login_url='login')
-def delete_task(request, ID):
-    task = Task.objects.get(pk=ID)
-    print(ID)
-    if request.user == task.goal.owner:
-        task.delete()
-        return redirect('/goals')
-    else:
-        raise Http404
+
 
 @login_required(login_url='login')
 def add_goal_view(request):
@@ -109,6 +116,15 @@ def delete_goal(request, ID):  # TODO: сделать выдвигающимся
     except Goal.DoesNotExist:
         raise Http404
 
+@login_required(login_url='login')
+def delete_task(request, ID):
+    task = Task.objects.get(pk=ID)
+    print(ID)
+    if request.user == task.goal.owner:
+        task.delete()
+        return redirect(f'/goals/{task.goal.id}')
+    else:
+        raise Http404
 
 @login_required(login_url='login')
 def add_task_view(request, ID):
@@ -122,7 +138,7 @@ def add_task_view(request, ID):
                     task.owner = request.user
                     task.goal = goal
                     task.save()
-                    return redirect('/goals')
+                    return redirect(f'/goals/{task.goal.id}')
                 else:
                     messages.error(request,  "Проверьте корректность ссылки! ")
                     tasks = list(Task.objects.filter(goal=goal))
