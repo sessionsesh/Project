@@ -8,30 +8,37 @@ from utils import datehelper
 # То есть идём по списку из элементов FreeTime, если beg_datetime == iteration.current_datetime
 
 # UTILS FOR CALENDAR
-def get_all_tasks(month, year, user):
-        """ Return tasks for month """
-        goals = list(FreeTime.objects.filter(owner=user))
-        tasks_list = []
-        for each in goals:
-            tasks = list(Task.objects.filter(goal=goal, is_finished=False))
-            for task in tasks:
-                tasks_list.append(task)
-        return tasks_list
+def get_all_tasks(user):
+    """ Return all tasks """
+    free_time_list = FreeTime.objects.filter(owner=user)
+    tasks_list = []
+    for each in free_time_list:
+        tasks_list.append(each.task)
+    return tasks_list
 
+
+def get_tasks_for_n_days(first_date, n, user):
+    """ Return tasks for n days from selected date """
+    free_time_list = FreeTime.objects.filter(owner=user)
+    tasks_list = []
+    counter = 0
+    for each in free_time_list:
+        if each.beg_datetime.date() >= first_date and each.task is not None and counter <= n:
+            counter += 1
+            tasks_list.append(each.task)
+    return tasks_list
 
 def get_dates_with_tasks(month, year, user):
     """ Return dictionary like this: {date_1:[task_1, task_2], etc.} """
     tasks = {}
-    month_tasks = get_all_tasks(month, year, user)
+    all_tasks = get_all_tasks(user)
     month_dates = datehelper.dates_in_month(month, year)
     for date in month_dates:
         tasks_list = []
-        for task in month_tasks:
+        for task in all_tasks:
             print(task._meta.get_field('created').value_from_object(task).strftime('%m')) # return value for selected model field
             if date == task._meta.get_field('beg_datetime').value_from_object(task):
                 tasks_list.append(task)
         tasks[date] = tasks_list
     return tasks
 
-def create_schedule(user, day):
-    free_time = FreeTime.objects.filter(user=user)[0]

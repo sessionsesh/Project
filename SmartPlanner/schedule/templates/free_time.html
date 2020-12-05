@@ -12,14 +12,17 @@
 {% block body %}
 <ul class="list-group">
 
-
     {% for freetime in free_time_list %}
         <li class="list-group-item">
             <div>beg: {{ freetime.beg_datetime }}</div>
             <div>duration: {{ freetime.duration }} <span>minute(s)</span></div>
-            <div>task: {{ freetime.task }}</div>
+            <div>task_title: {{ freetime.task.title }}</div>
             <a class="btn btn-danger" type="button" href="{% url 'schedule:delete_free_time' freetime.id %}">Удалить</a>
         </li>
+    {% empty %}
+    <li class="list-group-item">
+        <div>List is empty</div>
+    </li>
     {% endfor %}
 
     <li class="list-group-item">

@@ -24,5 +24,5 @@ class Task(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name='date_created', editable=False)
     goal = models.ForeignKey(Goal, on_delete=models.CASCADE, blank=False)
     is_finished = models.BooleanField(verbose_name='task_is_finished', default=False)
-
+    in_process = models.BooleanField(verbose_name='task_in_process', default=False)
     duration = models.IntegerField(null=True ,verbose_name='duration')

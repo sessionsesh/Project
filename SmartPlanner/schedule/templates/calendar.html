@@ -17,17 +17,7 @@
         <div>Воскресенье</div>
     </div>
 
-    <!-- TODO: add control several tasks per day -->
     <div class="date-grid">
-        <!-- {% for task in month_tasks %}
-        <div class="grid-cell">
-            <div class="number">{{ forloop.counter }}</div>
-            <ul>
-                <li>{{ task.title }}</li>
-            </ul>
-        </div>
-        {% endfor %} -->
-
         {% for day in dates %}
         <div class="grid-cell">
             <div class="number">{{ day }}</div>
@@ -37,7 +27,6 @@
                 <li><button><strike>Read about Compliers</strike></button></li>
                 <li><button>Don't be retarted </button></li>
                 <li><button>Don't be retarted </button></li>
-
             </ul>
         </div>
         {% endfor %}
