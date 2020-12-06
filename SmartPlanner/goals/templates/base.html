@@ -24,7 +24,7 @@
             display: none;
         }
     </style>
-    {% block css%}
+    {% block head%}
     {%endblock%}
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
 </head>
@@ -50,7 +50,7 @@
                     <a class="nav-link" href="{% url 'schedule:calendar_view' %}">Календарь</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'schedule:add_free_time' %}">Свободное время</a>
+                    <a class="nav-link" href="#">Свободное время</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link disabled" href="#">Профиль</a>

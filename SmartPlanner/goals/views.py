@@ -1,3 +1,4 @@
+from utils.datehelper import *
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, reverse, Http404
@@ -5,16 +6,16 @@ from django.http import JsonResponse
 from django.template.loader import render_to_string
 from .models import *
 from .forms import *
-
-
 import users
 
 # Sidebar and it's content
 # Goals in sidebar
+
+
 @login_required(login_url='login')
 def goals_view(request):
     user_id = request.user.id
-    
+
     # test user models in goals app
     # print(users.models.User.objects.get(pk=user_id).get_profile())
 
@@ -34,22 +35,23 @@ def goals_view(request):
     print("LOG: ", tasks_counter)
 
     args = {"goals": goals,
-            "tasks_counter":tasks_counter}
+            "tasks_counter": tasks_counter}
     return render(request, 'goals_.html', args)
 
 
-# Если задача выполнена, тогда делает её невыполненной и наоборот
+# Если задача выполнена, делает её невыполненной и наоборот
 @login_required
 def complete_task(request, ID):
-    print(request.method)
-    task = Task.objects.get(pk=ID)
-    if task.is_finished == False:
-        task.is_finished = True
-    else: 
-        task.is_finished = False
-    task.save()
-    return redirect(f'/goals/{task.goal.id}')
-
+    if request.method == 'GET':
+        task = Task.objects.get(pk=ID)
+        if task.is_finished == False:
+            task.is_finished = True
+        else:
+            task.is_finished = False
+        task.save()
+        return redirect(f'/goals/{task.goal.id}')
+    else:
+        return render('error.html')
 
 
 # Goal right from sidebar
@@ -57,7 +59,7 @@ def complete_task(request, ID):
 def goal_view(request, ID):
     goal = Goal.objects.get(pk=ID)
     goals = list(Goal.objects.filter(owner=request.user))
-    
+
     tasks_counter = {}
     # key is goal id
     # value.1 is goal title
@@ -71,12 +73,11 @@ def goal_view(request, ID):
         args = {"goals": goals,
                 "goal": goal,
                 "tasks": tasks,
-                "tasks_counter":tasks_counter,
+                "tasks_counter": tasks_counter,
                 }
         return render(request, 'goals.html', args)
     else:
         raise Http404
-
 
 
 @login_required(login_url='login')
@@ -90,41 +91,46 @@ def add_goal_view(request):
         goal_form = GoalCreateForm()
     return render(request, 'goal_manipulate.html', {'project_form': goal_form})
 
+
 @login_required(login_url='login')
 def edit_goal_view(request, ID):
     goal = Goal.objects.get(pk=ID)
     if request.method == 'POST':
         goal_form = GoalCreateForm(instance=goal, data=request.POST)
         if goal_form.is_valid():
-            goal_form.save(request.user) # doesn't need goal.save() because of custo msave in GoalCreateForm
+            # doesn't need goal.save() because of custo msave in GoalCreateForm
+            goal_form.save(request.user)
             return redirect('/goals/{}'.format(ID))
     else:
         goal_form = GoalCreateForm(instance=goal)
     return render(request, 'goal_manipulate.html', {'project_form': goal_form})
 
-from utils.datehelper import *
 
 @login_required(login_url='login')
 def delete_goal(request, ID):  # TODO: сделать выдвигающимся окном
     try:
-        goal = Goal.objects.get(pk=ID)
-        if request.user == goal.owner:
-            goal.delete()
-            return redirect('/goals')
-        else:
-            raise Http404
+        if request.method == 'GET':
+            goal = Goal.objects.get(pk=ID)
+            if request.user == goal.owner:
+                goal.delete()
+                return redirect('/goals')
+            else:
+                raise Http404
     except Goal.DoesNotExist:
         raise Http404
 
+
 @login_required(login_url='login')
 def delete_task(request, ID):
-    task = Task.objects.get(pk=ID)
-    print(ID)
-    if request.user == task.goal.owner:
-        task.delete()
-        return redirect(f'/goals/{task.goal.id}')
-    else:
-        raise Http404
+    if request.method == 'GET':
+        task = Task.objects.get(pk=ID)
+        print(ID)
+        if request.user == task.goal.owner:
+            task.delete()
+            return redirect(f'/goals/{task.goal.id}')
+        else:
+            raise Http404
+
 
 @login_required(login_url='login')
 def add_task_view(request, ID):
@@ -133,18 +139,24 @@ def add_task_view(request, ID):
         if request.user == goal.owner:
             if request.method == 'POST':
                 task_form = TaskCreateForm(data=request.POST)
+                print('DEBUG_BEFORE_VALID')
                 if task_form.is_valid():
+                    print('DEBUG_IS_VALID')
                     task = task_form.save(commit=False)
                     task.owner = request.user
                     task.goal = goal
                     task.save()
+                    
+                    # change task count in goal
+                    goal.task_count+=1
+                    goal.save()
                     return redirect(f'/goals/{task.goal.id}')
                 else:
+                    print('DEBUG_ISNOT_VALID')
                     messages.error(request,  "Проверьте корректность ссылки! ")
                     tasks = list(Task.objects.filter(goal=goal))
                     args = {"goal": goal, "tasks": tasks}
                     return render(request, 'error.html', args)
-           # return redirect("/mygoal/{}".format(str(project.id))) # TODO: на цель пользователя
             else:
                 task_form = TaskCreateForm()
                 return render(request, 'add_task.html', {'project_form': task_form})
@@ -152,6 +164,7 @@ def add_task_view(request, ID):
             raise Http404
     except Goal.DoesNotExist:
         raise Http404  # TODO: Вы слишком далеко забрались!
+
 
 @login_required(login_url='login')
 def edit_task_view(request, ID):
@@ -165,7 +178,7 @@ def edit_task_view(request, ID):
                 return redirect('/goals')
         # return redirect("/mygoal/{}".format(str(project.id))) # TODO: на цель пользователя
         else:
-            task_form = TaskCreateForm(instance = task)
+            task_form = TaskCreateForm(instance=task)
             return render(request, 'add_task.html', {'project_form': task_form})
     else:
         raise Http404

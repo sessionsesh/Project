@@ -43,14 +43,17 @@ class TaskCreateForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ('url', 'title', 'duration')
+
         exclude = {'owner',
                    'created',
                    'goal',
-                   'is_finihed'}
+                   'is_finihed',
+                   'in_process'}
+                   
         widgets = {
             'url': forms.Textarea(attrs={'cols': 80, 'rows': 1}),
             'title': forms.Textarea(attrs={'cols': 80, 'rows': 20}),
-            'duration': forms.IntegerField()}
+            'duration': forms.NumberInput()}
 
     def clean(self, *args, **kwargs):
         sys.path.append(os.path.realpath('.'))
