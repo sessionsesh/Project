@@ -8,14 +8,15 @@ class FreeTimeCreateForm(forms.ModelForm):
         exclude = [
             'owner',
             'task',
+            'day'
         ]
 
         fields = [
-            'beg_datetime',
+            'beg_time',
             'duration'
         ]
 
         widgets = {
-            'beg_datetime': forms.DateTimeInput(format='%d/%m/%Y %H:%M'),
-            'duration': forms.NumberInput(),
+            'beg_time':forms.TimeInput(),
+            'duration': forms.NumberInput()
         }

@@ -1,10 +1,50 @@
 {% extends 'base.html' %}
 {% block title%} Календарь {% endblock %}
-{% block body %}
 
 {% block head %}
 <link href="../static/css/calendar.css" rel="stylesheet" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 {% endblock %}
+
+{% block body %}
+<!-- MODAL FORM -->
+<div id="modal-add-freetime" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p>Ваше свободное время на</p>
+                <span id="freetime-date"></span>
+            </div>
+            <div class="modal-body">
+                welcome to the club, <s>body</s> buddy
+            </div>
+            <div class="modal-footer">
+                <span>Добавить</span>
+                <div class="add_freetime">
+                    <form action="{% url 'schedule:add_free_time' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="beg_time" class="col-form-label">Начало: </label>
+                            <input type="time" name="beg_time" />
+                        </div>
+                        <div class="form-group">
+                            <label for="duration" class="col-form-label">Длительность: </label>
+                            <input type="range" name="duration" class="form-control" min="30" , max="300"
+                                name="duration" oninput="this.nextElementSibling.value = this.value;">
+                            <output>0</output> <span>minute(s)</span>
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" name='day' value="">
+                        </div>
+                        <input type="submit" value="Добавить" class="btn btn-block btn-secondary">
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END OF MODAL FORM -->
 
 <div class="calendar">
     <div class="day-of-week">
@@ -21,23 +61,45 @@
         {% for day in dates %}
         <div class="grid-cell">
             <div class="number">{{ day }}</div>
-            <ul>
-                <li><button><strike>LoR</strike></button></li>
-                <li><button>Do Exercises</button></li>
-                <li><button><strike>Read about Compliers</strike></button></li>
-                <li><button>Don't be retarted </button></li>
-                <li><button>Don't be retarted </button></li>
-            </ul>
+            {% for key, value in date_freetime_dict.items %}
+                {% ifequal key day%}
+                    <ul>
+                    {% for ft in value %}
+                    <li>
+                        <span style="border:1px solid black;">{{ forloop.counter }}</span>
+                        <span style="border:1px solid black;">{{ ft.duration }}</span> 
+                        <span style="border:1px solid black;">{{ ft.beg_time }}</span>
+                        <a class="btn btn-danger" type="button" href="{% url 'schedule:delete_free_time' ft.id %}">del</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endifequal %}
+            {% endfor %}
+            <button type="button" value="{{ day|date:'Y-m-d' }}" class="btn btn-info btn-sm add-freetime-button"
+                data-toggle="modal" data-target="#modal-add-freetime">Add FreeTime</button>
         </div>
         {% endfor %}
 
-        
+
     </div>
-    <div class="today">
+    <div class="info">
         Сегодня {{ current_date }}
-    </br>
+        </br>
         Дней в текущем месяце: {{ days_in_current_month }}
-    </div>
         Первый день первой недели месяца: {{ first_day_of_week }}
+    </div>
+    <div class="test">
+
+    </div>
 </div>
+
+<script>
+    var add_ft_buttons = $(".add-freetime-button")
+    add_ft_buttons.click(function (event) {
+        console.log(event)
+        $("[name='day']").val(this.value)   // это влияет на POST
+        $("#freetime-date").text(this.value)    // это не влияет на POST
+    })
+</script>
+
 {% endblock %}
