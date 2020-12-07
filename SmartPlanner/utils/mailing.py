@@ -8,7 +8,7 @@ import os
 
 def render_to_string(path, ctx):
     path = os.path.join(settings.BASE_DIR, path)
-    with open(path, "r") as file:
+    with open(path, "r", encoding='utf-8') as file:
         text = file.readlines()
         text = ''.join(text)
     template = Template(text)

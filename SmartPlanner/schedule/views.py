@@ -21,6 +21,7 @@ def schedule_generator(request):
                     task.save()
                     ft.task = task
                     ft.save()
+                    break
     return redirect('/calendar')
 
 @login_required
@@ -68,8 +69,9 @@ def delete_free_time(request, ID):
         ft.day.save()
 
         # Задача теперь не находится в процессе выполнения
-        ft.task.in_process = False
-        ft.task.save()
+        if ft.task is not None:
+            ft.task.in_process = False
+            ft.task.save()
 
         # Удаление FreeTime
         ft.delete()

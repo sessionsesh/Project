@@ -13,7 +13,7 @@ class Goal(models.Model):
     description = models.TextField(blank=True)
 
     # task counters
-    complteted_task_count = models.IntegerField(default=0)
+    completed_task_count = models.IntegerField(default=0)
     task_count = models.IntegerField(default=0)
 
 
