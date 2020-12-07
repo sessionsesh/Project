@@ -4,6 +4,21 @@
 {% block head %}
 <link href="../static/css/calendar.css" rel="stylesheet" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+<style>
+    .freetime-container {
+        border-radius: 25px;
+        background: #48db68;
+        margin: 10px;
+    }
+
+    .freetime-container-item {
+        display: inline;
+    }
+    .freetime-container-item:hover {
+        background-color: bisque;
+       
+    }
+</style>
 {% endblock %}
 
 {% block body %}
@@ -62,18 +77,24 @@
         <div class="grid-cell">
             <div class="number">{{ day }}</div>
             {% for key, value in date_freetime_dict.items %}
-                {% ifequal key day%}
-                    <ul>
-                    {% for ft in value %}
-                    <li>
-                        <span style="border:1px solid black;">{{ forloop.counter }}</span>
-                        <span style="border:1px solid black;">{{ ft.duration }}</span> 
-                        <span style="border:1px solid black;">{{ ft.beg_time }}</span>
-                        <a class="btn btn-danger" type="button" href="{% url 'schedule:delete_free_time' ft.id %}">del</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-                {% endifequal %}
+            <!-- Если дата из словаря совпадает с общей датой, то добавляем в этот день элементы FreeTime -->
+            {% ifequal key day%}
+            <ul>
+                {% for ft in value %}
+                <li>
+                    <div class="freetime-container">
+                        <div class="freetime-container-item">
+                            <span>{{ ft.beg_time }} + {{ ft.duration }}min</span>
+                        </div>
+                        <div class="freetime-container-item"> 
+                            <span></span>{{ ft.task.title }}</span>
+                            <a class="btn btn-danger" type="button"href="{% url 'schedule:delete_free_time' ft.id %}">del</a>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endifequal %}
             {% endfor %}
             <button type="button" value="{{ day|date:'Y-m-d' }}" class="btn btn-info btn-sm add-freetime-button"
                 data-toggle="modal" data-target="#modal-add-freetime">Add FreeTime</button>

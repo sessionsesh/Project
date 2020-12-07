@@ -15,7 +15,7 @@ def schedule_generator(request):
     tasks_to_do = Task.objects.filter(in_process=False, is_finished=False)
     for task in tasks_to_do:
         for ft in freetime:
-            if ft.task is None: # так задачу на этот FreeTime может быть поставлена в этом цикле
+            if ft.task is None: # так как задача на этот FreeTime может быть поставлена ранее в этом цикле
                 if ft.duration >= task.duration:
                     task.in_process = True
                     task.save()
@@ -63,8 +63,15 @@ def add_free_time(request):
 def delete_free_time(request, ID):
     ft = FreeTime.objects.get(pk=ID)    # ft means freetime
     if request.user == ft.owner:
+        # Уменьшаем количество задач в дне, который был связан с FreeTime
         ft.day.freetime_count -= 1
         ft.day.save()
+
+        # Задача теперь не находится в процессе выполнения
+        ft.task.in_process = False
+        ft.task.save()
+
+        # Удаление FreeTime
         ft.delete()
         return redirect('/calendar')
     else:
