@@ -64,15 +64,17 @@ def goal_view(request, ID):
     # key is goal id
     # value.1 is goal title
     # value.2 is count of goal's tasks
-    for goal_ in goals:
-        tasks = list(Task.objects.filter(goal=goal_))
-        tasks_counter[goal_.id] = [goal_.title, len(tasks)]
+    for each_goal in goals:
+        tasks = Task.objects.filter(goal=each_goal, is_finished=False)
+        tasks_counter[each_goal.id] = [each_goal.title, len(tasks)]
 
     if request.user == goal.owner:
-        tasks = list(Task.objects.filter(goal=goal))
+        completed_tasks = Task.objects.filter(goal=goal, is_finished=True)
+        uncompleted_tasks = Task.objects.filter(goal=goal, is_finished=False)
         args = {"goals": goals,
                 "goal": goal,
-                "tasks": tasks,
+                "completed_tasks": completed_tasks,
+                "uncompleted_tasks": uncompleted_tasks,
                 "tasks_counter": tasks_counter,
                 }
         return render(request, 'goals.html', args)

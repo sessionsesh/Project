@@ -1,16 +1,53 @@
-{% for task in tasks %}
+<div>
+  <h1 class="display-4">Невыполненные задачи</h1>
+</div>
+
+{% for task in uncompleted_tasks %}
 <div class="tasks">
   <div class="task_counter">{{ forloop.counter }}</div>
   <ul class="list-group">
     <li class="list-group-item">
       Link: <a href="{{ task.url }}"> {{ task.url }} </a> </br>
-      Title: {{ task.title }} </br> 
-      Date: {{ task.created }} </br> 
-      In_Process: {{ task.in_process}}</br> 
+      Title: {{ task.title }} </br>
+      Date: {{ task.created }} </br>
+      In_Process: {{ task.in_process}}</br>
       <a class="btn btn-danger" type="button" href="{% url 'goals:delete_task' task.id %}">Удалить</a>
       <a class="btn btn-secondary" type="button" href="{% url 'goals:edit_task' task.id  %}">Редактировать</a>
-      <a class="btn btn-success" type="button" href="{% url 'goals:complete_task' task.id %}"> {{ task.is_finished }} </a>
+      <a class="btn btn-success" type="button" href="{% url 'goals:complete_task' task.id %}"> Выполнена:
+        {{ task.is_finished }} </a>
     </li>
   </ul>
+</div>
+{% empty %}
+<div>
+  <p class=".lead" style="margin-left: 0.5rem;">
+    <span>Круто, вы выполнили все поставленные задачи</span>
+  </p>
+</div>
+{% endfor %}
+<div>
+  <h1 class="display-4">Выполненные задачи</h1>
+</div>
+{% for task in completed_tasks %}
+<div class="tasks">
+  <div class="task_counter">{{ forloop.counter }}</div>
+  <ul class="list-group">
+    <li class="list-group-item">
+      Link: <a href="{{ task.url }}"> {{ task.url }} </a> </br>
+      Title: {{ task.title }} </br>
+      Date: {{ task.created }} </br>
+      In_Process: {{ task.in_process}}</br>
+      <a class="btn btn-danger" type="button" href="{% url 'goals:delete_task' task.id %}">Удалить</a>
+      <a class="btn btn-secondary" type="button" href="{% url 'goals:edit_task' task.id  %}">Редактировать</a>
+      <a class="btn btn-success" type="button" href="{% url 'goals:complete_task' task.id %}"> Выполнена:
+        {{ task.is_finished }} </a>
+    </li>
+  </ul>
+</div>
+{% empty %}
+<div>
+  <p class=".lead" style="margin-left: 0.5rem;">
+    <span>Что-то пустовато</span>
+  </p>
 </div>
 {% endfor %}
