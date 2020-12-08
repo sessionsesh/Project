@@ -14,9 +14,10 @@
     .freetime-container-item {
         display: inline;
     }
+
     .freetime-container-item:hover {
         background-color: bisque;
-       
+
     }
 </style>
 {% endblock %}
@@ -30,13 +31,21 @@
                 <p>Ваше свободное время на</p>
                 <span id="freetime-date"></span>
             </div>
-            <div class="modal-body">
-                welcome to the club, <s>body</s> buddy
-            </div>
-            <div class="modal-footer">
-                <span>Добавить</span>
-                <div class="add_freetime">
-                    <form action="{% url 'schedule:add_free_time' %}" method="POST">
+            <form action="{% url 'schedule:add_free_time' %}" method="POST">
+                <div class="modal-body">
+                    <label for="task">Выберите задачу для выполнения, если хотите:</label>
+                    <select id="tasks" name="task">
+                        <option value="task">POST_TEST</option>
+                        <!-- {% for task in tasks %}
+                        <option value="{{ task.id }}" class="task">{{ task.title }}</option>
+                        {% endfor %} -->
+                    </select>
+                </div>
+
+                <div class="modal-footer">
+                    <span>Добавить</span>
+                    <div class="add_freetime">
+
                         {% csrf_token %}
                         <div class="form-group">
                             <label for="beg_time" class="col-form-label">Начало: </label>
@@ -52,10 +61,10 @@
                             <input type="hidden" name='day' value="">
                         </div>
                         <input type="submit" value="Добавить" class="btn btn-block btn-secondary">
-                    </form>
-                </div>
 
-            </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -86,9 +95,10 @@
                         <div class="freetime-container-item">
                             <span>{{ ft.beg_time }} + {{ ft.duration }}min</span>
                         </div>
-                        <div class="freetime-container-item"> 
+                        <div class="freetime-container-item">
                             <span></span>{{ ft.task.title }}</span>
-                            <a class="btn btn-danger" type="button"href="{% url 'schedule:delete_free_time' ft.id %}">del</a>
+                            <a class="btn btn-danger" type="button"
+                                href="{% url 'schedule:delete_free_time' ft.id %}">del</a>
                         </div>
                     </div>
                 </li>
@@ -117,9 +127,22 @@
 <script>
     var add_ft_buttons = $(".add-freetime-button")
     add_ft_buttons.click(function (event) {
-        console.log(event)
-        $("[name='day']").val(this.value)   // это влияет на POST
-        $("#freetime-date").text(this.value)    // это не влияет на POST
+        $("[name='day']").val(this.value)   // этот тег влияет на POST
+        $("#freetime-date").text(this.value)    // этот тег не влияет на POST
+
+        /* Запрос на получения списка задач */
+        $.ajax({
+            type: "GET",
+            dataType: "html",
+            url: "freetime/ajax/get_tasks",
+            success: function (data) {
+                $("#tasks").html(data)
+            },
+            error: function (info) {
+                alert("some error happends with ajax");
+            }
+
+        })
     })
 </script>
 

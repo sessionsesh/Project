@@ -7,6 +7,7 @@ from .forms import *
 from schedule.engine import *
 import datetime
 
+
 @login_required
 def schedule_generator(request):
     ''' Просто добавляет задачи в FreeTime если их длительность <= длительности FreeTime '''
@@ -15,7 +16,7 @@ def schedule_generator(request):
     tasks_to_do = Task.objects.filter(in_process=False, is_finished=False)
     for task in tasks_to_do:
         for ft in freetime:
-            if ft.task is None: # так как задача на этот FreeTime может быть поставлена ранее в этом цикле
+            if ft.task is None:  # так как задача на этот FreeTime может быть поставлена ранее в этом цикле
                 if ft.duration >= task.duration:
                     task.in_process = True
                     task.save()
@@ -23,6 +24,7 @@ def schedule_generator(request):
                     ft.save()
                     break
     return redirect('/calendar')
+
 
 @login_required
 def add_free_time(request):
@@ -32,12 +34,13 @@ def add_free_time(request):
         if free_time_form.is_valid():
             # Ищем в днях запись с датой из POST запроса
             day = Day.objects.filter(date=request.POST['day'])
-            
+
             # Если такой записи нет, то создаем и сохраняем
-            if len(day)== 0:
+            if len(day) == 0:
                 day = Day()
                 day.owner = request.user
-                day.date = datetime.datetime.strptime(request.POST['day'], '%Y-%m-%d').date()
+                day.date = datetime.datetime.strptime(
+                    request.POST['day'], '%Y-%m-%d').date()
                 day.freetime_count += 1
                 day.save()
             else:
@@ -49,16 +52,23 @@ def add_free_time(request):
             freetime = free_time_form.save(commit=False)
             freetime.owner = request.user
             freetime.day = day
+
+            task_id = request.POST['task']
+
+            if task_id:
+                ''' Если пользователем была выбрана задача из списка, поставить её на выполнение '''
+                user_task = Task.objects.get(pk=task_id)
+                user_task.in_process = True
+                user_task.save()
+                freetime.task = user_task
+
             freetime.save()
             return redirect('/calendar')
         else:
-            return render(request, 'error.html')
+            raise Http404
     else:
-        # free_time_form = FreeTimeCreateForm()
-        # free_time_list = FreeTime.objects.filter(owner_id=user_id) # интересно, почему работает с "owner", ведь column в таблице БД имеет value = owner_id
-        # args = {'free_time_form': free_time_form,
-        #         'free_time_list': free_time_list}
-        return render(request, 'error.html')
+        raise Http404
+
 
 @login_required
 def delete_free_time(request, ID):
@@ -78,6 +88,7 @@ def delete_free_time(request, ID):
         return redirect('/calendar')
     else:
         raise Http404
+
 
 @login_required
 def calendar_view(request):
@@ -100,8 +111,6 @@ def calendar_view(request):
         date_freetime_dict.setdefault(ft.day.date, []).append(ft)
         ''' Если список есть в словаре по этому ключу, и добавь к нему ft.
             Иначе создай список '''
-        
-    
 
     args = {
         'current_date': current_date(),
@@ -112,4 +121,16 @@ def calendar_view(request):
         'date_freetime_dict': date_freetime_dict
     }
     return render(request, 'calendar.html', args)
-    
+
+
+@login_required
+def get_tasks(request):
+    ''' Возвращает список задач пользователя, которые не выполняются и не завершены'''
+    if request.method == 'GET':
+        user_tasks = Task.objects.filter(owner=request.user.id,
+                                         is_finished=False,
+                                         in_process=False)
+        args = {'tasks': user_tasks}
+        return render(request, "tasks_for_choose.html", args)
+    else:
+        raise Http404

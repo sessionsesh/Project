@@ -1,0 +1,5 @@
+<!-- Данный html является ответом на ajax POST запрос и помещается в body-tag модальной формы в calendar.html при помощи jQuery -->
+<option value="" class="task"> -------- </option>
+{% for task in tasks %}
+<option value="{{ task.id }}" class="task">{{ task.title }}</option>
+{% endfor %}
