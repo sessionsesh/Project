@@ -12,15 +12,11 @@ import datetime
 def schedule_generator(request):
     """Формирует расписание на основе не выполняемых задач
 
-    :param file_loc: The file location of the spreadsheet
-    :type file_loc: str
-    :param print_cols: A flag used to print the columns to the console
-    (default is False)
-    :type print_cols: bool
-    :returns: a list of strings representing the header columns
-    :rtype: list
+    :parameter request: Запрос пользователя
+    :type request: django.core.handlers.wsgi.WSGIRequest
+    :return: Перенаправляет пользователя на страницу календаря
+    :rtype: HttpResponseRedirect 
     """
-
     freetime = FreeTime.objects.filter(task=None)
     tasks_to_do = Task.objects.filter(in_process=False, is_finished=False)
     for task in tasks_to_do:
@@ -32,11 +28,19 @@ def schedule_generator(request):
                     ft.task = task
                     ft.save()
                     break
+    print(redirect('/calendar'))
     return redirect('/calendar')
 
 
 @login_required
 def add_free_time(request):
+    """Добавляет свободное время пользователя в базу данных
+
+    :parameter request: Запрос пользователя
+    :type request: django.core.handlers.wsgi.WSGIRequest
+    :return: Перенаправляет пользователя на страницу календаря
+    :rtype: HttpResponseRedirect
+    """
     user_id = request.user.id
     if request.method == 'POST':
         free_time_form = FreeTimeCreateForm(request.POST)
@@ -81,6 +85,15 @@ def add_free_time(request):
 
 @login_required
 def delete_free_time(request, ID):
+    """Добавляет свободное время пользователя в базу данных
+
+    :parameter request: Запрос пользователя
+    :type request: django.core.handlers.wsgi.WSGIRequest
+    :parameter ID: Первичный ключ записи свободного времени в таблице
+    :type ID: int
+    :return: Перенаправляет пользователя на страницу календаря
+    :rtype: HttpResponseRedirect
+    """
     ft = FreeTime.objects.get(pk=ID)    # ft means freetime
     if request.user == ft.owner:
         # Уменьшаем количество задач в дне, который был связан с FreeTime
@@ -101,6 +114,13 @@ def delete_free_time(request, ID):
 
 @login_required
 def calendar_view(request):
+    """Отображает страницу календаря
+    
+    :parameter request: Запрос пользователя
+    :type request: django.core.handlers.wsgi.WSGIRequest
+    :return: Перенаправляет пользователя на страницу календаря
+    :rtype: django.http.response.HttpResponse
+    """
     user_id = request.user.id
 
     month = current_month()
@@ -129,12 +149,19 @@ def calendar_view(request):
         'dates': dates,
         'date_freetime_dict': date_freetime_dict
     }
+    print(type(render(request, 'calendar.html', args)))
     return render(request, 'calendar.html', args)
 
 
 @login_required
 def get_tasks(request):
-    ''' Возвращает список задач пользователя, которые не выполняются и не завершены'''
+    """Возвращает список задач пользователя, которые не выполняются и не завершены
+    
+    :parameter request: Запрос пользователя
+    :type request: django.core.handlers.wsgi.WSGIRequest
+    :return: Список задач
+    :rtype: django.http.response.HttpResponse
+    """
     if request.method == 'GET':
         user_tasks = Task.objects.filter(owner=request.user.id,
                                          is_finished=False,

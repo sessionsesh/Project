@@ -9,7 +9,13 @@ from utils import datehelper
 
 # UTILS FOR CALENDAR
 def get_all_tasks(user):
-    """ Return all tasks """
+    """Возвращает список задач пользователя, которые не выполняются и не завершены
+    
+    :parameter user: Объект пользователя
+    :type request: User
+    :return: Список всех задач пользователя
+    :rtype: list
+    """
     free_time_list = FreeTime.objects.filter(owner=user)
     tasks_list = []
     for each in free_time_list:
@@ -18,7 +24,21 @@ def get_all_tasks(user):
 
 
 def get_tasks_for_n_days(first_date, n, user):
-    """ Return tasks for n days from selected date """
+    """Возвращает список задач пользователя с выбранной даты до дня n
+    
+    :parameter first_date: Дата, с которой начинается отсчёт
+    :type first_date: datetime.date
+
+    :parameter n: Количество дней
+    :type n: int
+
+    :parameter user: Объект пользователя
+    :type request: User
+
+    :return: Список задач
+    :rtype: list
+    """
+
     free_time_list = FreeTime.objects.filter(owner=user)
     tasks_list = []
     counter = 0
@@ -29,7 +49,21 @@ def get_tasks_for_n_days(first_date, n, user):
     return tasks_list
 
 def get_dates_with_tasks(month, year, user):
-    """ Return dictionary like this: {date_1:[task_1, task_2], etc.} """
+    """Возвращает словарь дат и связанных с ними задач в выбранном месяце года
+    
+    :parameter month: Месяц
+    :type month: int
+
+    :parameter year: Год
+    :type n: int
+
+    :parameter user: Объект пользователя
+    :type request: User
+
+    :return: Словарь вида {date_1:[task_1, task_2], etc.}
+    :rtype: dict
+    """
+
     tasks = {}
     all_tasks = get_all_tasks(user)
     month_dates = datehelper.dates_in_month(month, year)

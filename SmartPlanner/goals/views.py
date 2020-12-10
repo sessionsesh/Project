@@ -14,6 +14,14 @@ import users
 
 @login_required(login_url='login')
 def goals_view(request):
+    """Отображает страницу с целями
+    
+    :parameter request: Запрос пользователя
+    :type request: django.core.handlers.wsgi.WSGIRequest
+
+    :return: Страница с целями
+    :rtype: django.http.response.HttpResponse
+    """
     user_id = request.user.id
 
     # test user models in goals app
@@ -42,6 +50,16 @@ def goals_view(request):
 # Если задача выполнена, делает её невыполненной и наоборот
 @login_required
 def complete_task(request, ID):
+    """Меняет значение поля is_finished задачи на True, если оно равно False и наоборот
+    
+    :parameter request: Запрос пользователя
+    :type request: django.core.handlers.wsgi.WSGIRequest
+    :parameter ID: Первичный ключ задачи
+    :type ID: Int
+
+    :return: Страница цели, которой пренадлежит задача
+    :rtype: HttpResponseRedirect
+    """
     if request.method == 'GET':
         task = Task.objects.get(pk=ID)
         if task.is_finished == False:
@@ -57,6 +75,16 @@ def complete_task(request, ID):
 # Goal right from sidebar
 @login_required(login_url='login')
 def goal_view(request, ID):
+    """Отображает цель и её задачи
+    
+    :parameter request: Запрос пользователя
+    :type request: django.core.handlers.wsgi.WSGIRequest
+    :parameter ID: Первичный ключ цели
+    :type ID: Int
+
+    :return: Страница цели с задачами
+    :rtype: HttpResponse
+    """
     goal = Goal.objects.get(pk=ID)
     goals = list(Goal.objects.filter(owner=request.user))
 
@@ -84,7 +112,19 @@ def goal_view(request, ID):
 
 @login_required(login_url='login')
 def add_goal_view(request):
+    """Добавляет новую цель в базу данных и отображает выполненные изменения
+    
+    :parameter request: Запрос пользователя
+    :type request: django.core.handlers.wsgi.WSGIRequest
+
+    :return: Страница с целями
+    :rtype: HttpResponseRedirect
+    """
     if request.method == 'POST':
+        """
+        test test test
+        ===============
+        """
         goal_form = GoalCreateForm(data=request.POST)
         if goal_form.is_valid():
             goal = goal_form.save(request.user)
@@ -96,6 +136,16 @@ def add_goal_view(request):
 
 @login_required(login_url='login')
 def edit_goal_view(request, ID):
+    """Изменяет поля цели, сохраняет изменения в базу данных и отображает изменения пользователю
+    
+    :parameter request: Запрос пользователя
+    :type request: django.core.handlers.wsgi.WSGIRequest
+    :parameter ID: Первичный ключ цели
+    :type ID: Int
+
+    :return: Страница с целью и её содержимым
+    :rtype: HttpResponseRedirect
+    """
     goal = Goal.objects.get(pk=ID)
     if request.method == 'POST':
         goal_form = GoalCreateForm(instance=goal, data=request.POST)
@@ -110,6 +160,16 @@ def edit_goal_view(request, ID):
 
 @login_required(login_url='login')
 def delete_goal(request, ID):  # TODO: сделать выдвигающимся окном
+    """Удаляет цель из базы данных и отображает изменения пользователю
+    
+    :parameter request: Запрос пользователя
+    :type request: django.core.handlers.wsgi.WSGIRequest
+    :parameter ID: Первичный ключ цели
+    :type ID: Int
+
+    :return: Страница с целями
+    :rtype: HttpResponseRedirect
+    """
     try:
         if request.method == 'GET':
             goal = Goal.objects.get(pk=ID)
@@ -124,6 +184,16 @@ def delete_goal(request, ID):  # TODO: сделать выдвигающимся
 
 @login_required(login_url='login')
 def delete_task(request, ID):
+    """Удаляет задачу из базы данных и отображает изменения пользователю
+    
+    :parameter request: Запрос пользователя
+    :type request: django.core.handlers.wsgi.WSGIRequest
+    :parameter ID: Первичный ключ задачи
+    :type ID: Int
+
+    :return: Страница с целью, которой принадлежала задача
+    :rtype: HttpResponseRedirect
+    """
     if request.method == 'GET':
         task = Task.objects.get(pk=ID)
         print(ID)
@@ -136,6 +206,16 @@ def delete_task(request, ID):
 
 @login_required(login_url='login')
 def add_task_view(request, ID):
+    """Добавляет задачу в базу данных, сохраняет изменения и отображает их пользователю
+    
+    :parameter request: Запрос пользователя
+    :type request: django.core.handlers.wsgi.WSGIRequest
+    :parameter ID: Первичный ключ задачи
+    :type ID: Int
+
+    :return: Страница с целью, которой принадлежит задача
+    :rtype: HttpResponseRedirect
+    """
     try:
         goal = Goal.objects.get(pk=ID)
         if request.user == goal.owner:
@@ -148,9 +228,9 @@ def add_task_view(request, ID):
                     task.owner = request.user
                     task.goal = goal
                     task.save()
-                    
+
                     # change task count in goal
-                    goal.task_count+=1
+                    goal.task_count += 1
                     goal.save()
                     return redirect(f'/goals/{task.goal.id}')
                 else:
@@ -170,6 +250,16 @@ def add_task_view(request, ID):
 
 @login_required(login_url='login')
 def edit_task_view(request, ID):
+    """Отображает страницу с изменением содержания задачи в случае GET запроса. Изменяет содержимое задачи и сохрняет изменения в базу данных в случае POST запроса  
+    
+    :parameter request: Запрос пользователя
+    :type request: django.core.handlers.wsgi.WSGIRequest
+    :parameter ID: Первичный ключ задачи
+    :type ID: Int
+
+    :return: Страница с целью, которой принадлежит задача
+    :rtype: HttpResponseRedirect
+    """
     task = Task.objects.get(pk=ID)
     if request.user == task.goal.owner:
         if request.method == 'POST':

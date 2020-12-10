@@ -1,0 +1,335 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>utils package &#8212; SmartPlanner  documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="users.migrations package" href="users.migrations.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="utils-package">
+<h1>utils package<a class="headerlink" href="#utils-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-utils.datehelper">
+<span id="utils-datehelper-module"></span><h2>utils.datehelper module<a class="headerlink" href="#module-utils.datehelper" title="Permalink to this headline">¶</a></h2>
+<p>Простой API для взаимодействия с базовым модулем datetime языка python</p>
+<dl class="py function">
+<dt id="utils.datehelper.current_date">
+<code class="sig-prename descclassname">utils.datehelper.</code><code class="sig-name descname">current_date</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utils.datehelper.current_date" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Возвращает текущую дату и время</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>datetime.datetime</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="utils.datehelper.current_day">
+<code class="sig-prename descclassname">utils.datehelper.</code><code class="sig-name descname">current_day</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utils.datehelper.current_day" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Возвращает текущий день</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>datetime.datetime</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="utils.datehelper.current_month">
+<code class="sig-prename descclassname">utils.datehelper.</code><code class="sig-name descname">current_month</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utils.datehelper.current_month" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Возвращает текущий месяц</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>datetime.datetime</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="utils.datehelper.current_year">
+<code class="sig-prename descclassname">utils.datehelper.</code><code class="sig-name descname">current_year</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utils.datehelper.current_year" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Возвращает текущий год</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>datetime.datetime</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="utils.datehelper.dates_in_month">
+<code class="sig-prename descclassname">utils.datehelper.</code><code class="sig-name descname">dates_in_month</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">month</span></em>, <em class="sig-param"><span class="n">year</span></em><span class="sig-paren">)</span><a class="headerlink" href="#utils.datehelper.dates_in_month" title="Permalink to this definition">¶</a></dt>
+<dd><p>Возвращает список дней в месяце</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>month</strong> (<em>Int</em>) – Месяц</p></li>
+<li><p><strong>month</strong> – Год</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Список дней</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="utils.datehelper.days_in_month">
+<code class="sig-prename descclassname">utils.datehelper.</code><code class="sig-name descname">days_in_month</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">month</span></em>, <em class="sig-param"><span class="n">year</span></em><span class="sig-paren">)</span><a class="headerlink" href="#utils.datehelper.days_in_month" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>month</strong> (<em>Int</em>) – Месяц</p></li>
+<li><p><strong>month</strong> – Год</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Возвращает количество дней в месяце</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="utils.datehelper.first_day_of_week">
+<code class="sig-prename descclassname">utils.datehelper.</code><code class="sig-name descname">first_day_of_week</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">month</span></em>, <em class="sig-param"><span class="n">year</span></em><span class="sig-paren">)</span><a class="headerlink" href="#utils.datehelper.first_day_of_week" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>month</strong> (<em>Int</em>) – Месяц</p></li>
+<li><p><strong>month</strong> – Год</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Возвращает первый день недели месяца</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-utils.mailing">
+<span id="utils-mailing-module"></span><h2>utils.mailing module<a class="headerlink" href="#module-utils.mailing" title="Permalink to this headline">¶</a></h2>
+<p>Функции для отправления писем о регистрации и смене пароля</p>
+<dl class="py function">
+<dt id="utils.mailing.generate_context">
+<code class="sig-prename descclassname">utils.mailing.</code><code class="sig-name descname">generate_context</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key_ref</span></em>, <em class="sig-param"><span class="n">type</span></em><span class="sig-paren">)</span><a class="headerlink" href="#utils.mailing.generate_context" title="Permalink to this definition">¶</a></dt>
+<dd><p>Генерирует контекст на основе ключа о подтверждении регистрации</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kery_ref</strong> – Ключ для ссылки</p></li>
+<li><p><strong>type</strong> (<em>type</em>) – Тип</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Словарь вида {‘url’: signup_url}</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="utils.mailing.generate_ref">
+<code class="sig-prename descclassname">utils.mailing.</code><code class="sig-name descname">generate_ref</code><span class="sig-paren">(</span><em class="sig-param">hash_func=&lt;built-in function openssl_sha256&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.mailing.generate_ref" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="utils.mailing.render_to_string">
+<code class="sig-prename descclassname">utils.mailing.</code><code class="sig-name descname">render_to_string</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">ctx</span></em><span class="sig-paren">)</span><a class="headerlink" href="#utils.mailing.render_to_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Составляет строку содержания письма на основе файла</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>string</em>) – Путь к файлу с содержанием письму</p></li>
+<li><p><strong>ctx</strong> (<em>django.template.Context</em>) – Контекстные слова</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Содержание письма</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="utils.mailing.send_confirmation_email">
+<code class="sig-prename descclassname">utils.mailing.</code><code class="sig-name descname">send_confirmation_email</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">to</span></em>, <em class="sig-param"><span class="n">ctx</span></em><span class="sig-paren">)</span><a class="headerlink" href="#utils.mailing.send_confirmation_email" title="Permalink to this definition">¶</a></dt>
+<dd><p>Отправляет письмо о потдверждении почты</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>to</strong> (<em>string</em>) – Адресат</p></li>
+<li><p><strong>ctx</strong> (<em>Context</em>) – Контекстные слова</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="utils.mailing.send_password_change_email">
+<code class="sig-prename descclassname">utils.mailing.</code><code class="sig-name descname">send_password_change_email</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">to</span></em>, <em class="sig-param"><span class="n">ctx</span></em><span class="sig-paren">)</span><a class="headerlink" href="#utils.mailing.send_password_change_email" title="Permalink to this definition">¶</a></dt>
+<dd><p>Отправляет письмо о смене пароля почты</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>to</strong> (<em>string</em>) – Адресат</p></li>
+<li><p><strong>ctx</strong> (<em>Context</em>) – Контекстные слова</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-utils.parser">
+<span id="utils-parser-module"></span><h2>utils.parser module<a class="headerlink" href="#module-utils.parser" title="Permalink to this headline">¶</a></h2>
+<p>Парсер url адреса</p>
+<dl class="py function">
+<dt id="utils.parser.parse">
+<code class="sig-prename descclassname">utils.parser.</code><code class="sig-name descname">parse</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">url</span></em><span class="sig-paren">)</span><a class="headerlink" href="#utils.parser.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Проверяет соответствие url адреса следующему стандарту название_протоколо://доменное_имя/путь</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>url</strong> – URL адрес</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True если соотвествует, иначе False</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-utils" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">SmartPlanner</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">SmartPlanner</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="SmartPlanner.html">SmartPlanner package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="goals.html">goals package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manage.html">manage module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="schedule.html">schedule package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="users.html">users package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">utils package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">SmartPlanner</a><ul>
+      <li>Previous: <a href="users.migrations.html" title="previous chapter">users.migrations package</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Gleb Sorokin, Olga Toporkova.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/utils.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,618 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>goals package &#8212; SmartPlanner  documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="goals.migrations package" href="goals.migrations.html" />
+    <link rel="prev" title="SmartPlanner package" href="SmartPlanner.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="goals-package">
+<h1>goals package<a class="headerlink" href="#goals-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="goals.migrations.html">goals.migrations package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="goals.migrations.html#module-goals.migrations">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-goals.admin">
+<span id="goals-admin-module"></span><h2>goals.admin module<a class="headerlink" href="#module-goals.admin" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-goals.apps">
+<span id="goals-apps-module"></span><h2>goals.apps module<a class="headerlink" href="#module-goals.apps" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="goals.apps.GoalsConfig">
+<em class="property">class </em><code class="sig-prename descclassname">goals.apps.</code><code class="sig-name descname">GoalsConfig</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span><a class="headerlink" href="#goals.apps.GoalsConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.apps.AppConfig</span></code></p>
+<dl class="py attribute">
+<dt id="goals.apps.GoalsConfig.__doc__">
+<code class="sig-name descname">__doc__</code><em class="property"> = None</em><a class="headerlink" href="#goals.apps.GoalsConfig.__doc__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.apps.GoalsConfig.__module__">
+<code class="sig-name descname">__module__</code><em class="property"> = 'goals.apps'</em><a class="headerlink" href="#goals.apps.GoalsConfig.__module__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.apps.GoalsConfig.__orig_bases__">
+<code class="sig-name descname">__orig_bases__</code><em class="property"> = (django.apps.AppConfig,)</em><a class="headerlink" href="#goals.apps.GoalsConfig.__orig_bases__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.apps.GoalsConfig.name">
+<code class="sig-name descname">name</code><em class="property"> = 'goals'</em><a class="headerlink" href="#goals.apps.GoalsConfig.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-goals.forms">
+<span id="goals-forms-module"></span><h2>goals.forms module<a class="headerlink" href="#module-goals.forms" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="goals.forms.GoalCreateForm">
+<em class="property">class </em><code class="sig-prename descclassname">goals.forms.</code><code class="sig-name descname">GoalCreateForm</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span><a class="headerlink" href="#goals.forms.GoalCreateForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.forms.ModelForm</span></code></p>
+<dl class="py class">
+<dt id="goals.forms.GoalCreateForm.Meta">
+<em class="property">class </em><code class="sig-name descname">Meta</code><a class="headerlink" href="#goals.forms.GoalCreateForm.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt id="goals.forms.GoalCreateForm.Meta.__dict__">
+<code class="sig-name descname">__dict__</code><em class="property"> = mappingproxy({'__module__': 'goals.forms', 'model': &lt;class 'goals.models.Goal'&gt;, 'exclude': ('owner', 'is_reached', 'progress', 'created', 'end_date'), 'fields': ['title', 'description'], 'widgets': {'title': django.forms.Textarea, 'description': django.forms.Textarea}, '__dict__': &lt;attribute '__dict__' of 'Meta' objects&gt;, '__weakref__': &lt;attribute '__weakref__' of 'Meta' objects&gt;, '__doc__': None})</em><a class="headerlink" href="#goals.forms.GoalCreateForm.Meta.__dict__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.forms.GoalCreateForm.Meta.__doc__">
+<code class="sig-name descname">__doc__</code><em class="property"> = None</em><a class="headerlink" href="#goals.forms.GoalCreateForm.Meta.__doc__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.forms.GoalCreateForm.Meta.__module__">
+<code class="sig-name descname">__module__</code><em class="property"> = 'goals.forms'</em><a class="headerlink" href="#goals.forms.GoalCreateForm.Meta.__module__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.forms.GoalCreateForm.Meta.__weakref__">
+<code class="sig-name descname">__weakref__</code><a class="headerlink" href="#goals.forms.GoalCreateForm.Meta.__weakref__" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of weak references to the object (if defined)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.forms.GoalCreateForm.Meta.exclude">
+<code class="sig-name descname">exclude</code><em class="property"> = ('owner', 'is_reached', 'progress', 'created', 'end_date')</em><a class="headerlink" href="#goals.forms.GoalCreateForm.Meta.exclude" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.forms.GoalCreateForm.Meta.fields">
+<code class="sig-name descname">fields</code><em class="property"> = ['title', 'description']</em><a class="headerlink" href="#goals.forms.GoalCreateForm.Meta.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.forms.GoalCreateForm.Meta.model">
+<code class="sig-name descname">model</code><a class="headerlink" href="#goals.forms.GoalCreateForm.Meta.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#goals.models.Goal" title="goals.models.Goal"><code class="xref py py-class docutils literal notranslate"><span class="pre">goals.models.Goal</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.forms.GoalCreateForm.Meta.widgets">
+<code class="sig-name descname">widgets</code><em class="property"> = {'description': django.forms.Textarea, 'title': django.forms.Textarea}</em><a class="headerlink" href="#goals.forms.GoalCreateForm.Meta.widgets" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.forms.GoalCreateForm.__doc__">
+<code class="sig-name descname">__doc__</code><em class="property"> = None</em><a class="headerlink" href="#goals.forms.GoalCreateForm.__doc__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.forms.GoalCreateForm.__module__">
+<code class="sig-name descname">__module__</code><em class="property"> = 'goals.forms'</em><a class="headerlink" href="#goals.forms.GoalCreateForm.__module__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.forms.GoalCreateForm.__orig_bases__">
+<code class="sig-name descname">__orig_bases__</code><em class="property"> = (django.forms.ModelForm,)</em><a class="headerlink" href="#goals.forms.GoalCreateForm.__orig_bases__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="goals.forms.GoalCreateForm.save">
+<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user</span></em>, <em class="sig-param"><span class="n">commit</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#goals.forms.GoalCreateForm.save" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="goals.forms.TaskCreateForm">
+<em class="property">class </em><code class="sig-prename descclassname">goals.forms.</code><code class="sig-name descname">TaskCreateForm</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span><a class="headerlink" href="#goals.forms.TaskCreateForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.forms.ModelForm</span></code></p>
+<dl class="py class">
+<dt id="goals.forms.TaskCreateForm.Meta">
+<em class="property">class </em><code class="sig-name descname">Meta</code><a class="headerlink" href="#goals.forms.TaskCreateForm.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt id="goals.forms.TaskCreateForm.Meta.__dict__">
+<code class="sig-name descname">__dict__</code><em class="property"> = mappingproxy({'__module__': 'goals.forms', 'model': &lt;class 'goals.models.Task'&gt;, 'fields': ('url', 'title', 'duration'), 'exclude': {'in_process', 'created', 'owner', 'is_finihed', 'goal'}, 'widgets': {'url': django.forms.Textarea, 'title': django.forms.Textarea, 'duration': django.forms.NumberInput}, '__dict__': &lt;attribute '__dict__' of 'Meta' objects&gt;, '__weakref__': &lt;attribute '__weakref__' of 'Meta' objects&gt;, '__doc__': None})</em><a class="headerlink" href="#goals.forms.TaskCreateForm.Meta.__dict__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.forms.TaskCreateForm.Meta.__doc__">
+<code class="sig-name descname">__doc__</code><em class="property"> = None</em><a class="headerlink" href="#goals.forms.TaskCreateForm.Meta.__doc__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.forms.TaskCreateForm.Meta.__module__">
+<code class="sig-name descname">__module__</code><em class="property"> = 'goals.forms'</em><a class="headerlink" href="#goals.forms.TaskCreateForm.Meta.__module__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.forms.TaskCreateForm.Meta.__weakref__">
+<code class="sig-name descname">__weakref__</code><a class="headerlink" href="#goals.forms.TaskCreateForm.Meta.__weakref__" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of weak references to the object (if defined)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.forms.TaskCreateForm.Meta.exclude">
+<code class="sig-name descname">exclude</code><em class="property"> = {'created', 'goal', 'in_process', 'is_finihed', 'owner'}</em><a class="headerlink" href="#goals.forms.TaskCreateForm.Meta.exclude" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.forms.TaskCreateForm.Meta.fields">
+<code class="sig-name descname">fields</code><em class="property"> = ('url', 'title', 'duration')</em><a class="headerlink" href="#goals.forms.TaskCreateForm.Meta.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.forms.TaskCreateForm.Meta.model">
+<code class="sig-name descname">model</code><a class="headerlink" href="#goals.forms.TaskCreateForm.Meta.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#goals.models.Task" title="goals.models.Task"><code class="xref py py-class docutils literal notranslate"><span class="pre">goals.models.Task</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.forms.TaskCreateForm.Meta.widgets">
+<code class="sig-name descname">widgets</code><em class="property"> = {'duration': django.forms.NumberInput, 'title': django.forms.Textarea, 'url': django.forms.Textarea}</em><a class="headerlink" href="#goals.forms.TaskCreateForm.Meta.widgets" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.forms.TaskCreateForm.__doc__">
+<code class="sig-name descname">__doc__</code><em class="property"> = None</em><a class="headerlink" href="#goals.forms.TaskCreateForm.__doc__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.forms.TaskCreateForm.__module__">
+<code class="sig-name descname">__module__</code><em class="property"> = 'goals.forms'</em><a class="headerlink" href="#goals.forms.TaskCreateForm.__module__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.forms.TaskCreateForm.__orig_bases__">
+<code class="sig-name descname">__orig_bases__</code><em class="property"> = (django.forms.ModelForm,)</em><a class="headerlink" href="#goals.forms.TaskCreateForm.__orig_bases__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="goals.forms.TaskCreateForm.clean">
+<code class="sig-name descname">clean</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#goals.forms.TaskCreateForm.clean" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-goals.models">
+<span id="goals-models-module"></span><h2>goals.models module<a class="headerlink" href="#module-goals.models" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="goals.models.Goal">
+<em class="property">class </em><code class="sig-prename descclassname">goals.models.</code><code class="sig-name descname">Goal</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span><a class="headerlink" href="#goals.models.Goal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.Model</span></code></p>
+<dl class="py attribute">
+<dt id="goals.models.Goal.__doc__">
+<code class="sig-name descname">__doc__</code><em class="property"> = None</em><a class="headerlink" href="#goals.models.Goal.__doc__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.models.Goal.__module__">
+<code class="sig-name descname">__module__</code><em class="property"> = 'goals.models'</em><a class="headerlink" href="#goals.models.Goal.__module__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.models.Goal.__orig_bases__">
+<code class="sig-name descname">__orig_bases__</code><em class="property"> = (django.db.models.Model,)</em><a class="headerlink" href="#goals.models.Goal.__orig_bases__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.models.Goal.completed_task_count">
+<code class="sig-name descname">completed_task_count</code><a class="headerlink" href="#goals.models.Goal.completed_task_count" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.models.Goal.created">
+<code class="sig-name descname">created</code><a class="headerlink" href="#goals.models.Goal.created" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.models.Goal.description">
+<code class="sig-name descname">description</code><a class="headerlink" href="#goals.models.Goal.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.models.Goal.owner">
+<code class="sig-name descname">owner</code><a class="headerlink" href="#goals.models.Goal.owner" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.models.Goal.task_count">
+<code class="sig-name descname">task_count</code><a class="headerlink" href="#goals.models.Goal.task_count" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.models.Goal.title">
+<code class="sig-name descname">title</code><a class="headerlink" href="#goals.models.Goal.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="goals.models.Task">
+<em class="property">class </em><code class="sig-prename descclassname">goals.models.</code><code class="sig-name descname">Task</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span><a class="headerlink" href="#goals.models.Task" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.Model</span></code></p>
+<dl class="py attribute">
+<dt id="goals.models.Task.__doc__">
+<code class="sig-name descname">__doc__</code><em class="property"> = None</em><a class="headerlink" href="#goals.models.Task.__doc__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.models.Task.__module__">
+<code class="sig-name descname">__module__</code><em class="property"> = 'goals.models'</em><a class="headerlink" href="#goals.models.Task.__module__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.models.Task.__orig_bases__">
+<code class="sig-name descname">__orig_bases__</code><em class="property"> = (django.db.models.Model,)</em><a class="headerlink" href="#goals.models.Task.__orig_bases__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.models.Task.created">
+<code class="sig-name descname">created</code><a class="headerlink" href="#goals.models.Task.created" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.models.Task.duration">
+<code class="sig-name descname">duration</code><a class="headerlink" href="#goals.models.Task.duration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.models.Task.goal">
+<code class="sig-name descname">goal</code><a class="headerlink" href="#goals.models.Task.goal" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#goals.models.Goal" title="goals.models.Goal"><code class="xref py py-class docutils literal notranslate"><span class="pre">Goal</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.models.Task.in_process">
+<code class="sig-name descname">in_process</code><a class="headerlink" href="#goals.models.Task.in_process" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.models.Task.is_finished">
+<code class="sig-name descname">is_finished</code><a class="headerlink" href="#goals.models.Task.is_finished" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.models.Task.owner">
+<code class="sig-name descname">owner</code><a class="headerlink" href="#goals.models.Task.owner" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.models.Task.title">
+<code class="sig-name descname">title</code><a class="headerlink" href="#goals.models.Task.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="goals.models.Task.url">
+<code class="sig-name descname">url</code><a class="headerlink" href="#goals.models.Task.url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-goals.tests">
+<span id="goals-tests-module"></span><h2>goals.tests module<a class="headerlink" href="#module-goals.tests" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-goals.urls">
+<span id="goals-urls-module"></span><h2>goals.urls module<a class="headerlink" href="#module-goals.urls" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-goals.views">
+<span id="goals-views-module"></span><h2>goals.views module<a class="headerlink" href="#module-goals.views" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="goals.views.add_goal_view">
+<code class="sig-prename descclassname">goals.views.</code><code class="sig-name descname">add_goal_view</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#goals.views.add_goal_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Добавляет новую цель в базу данных и отображает выполненные изменения</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> (<em>django.core.handlers.wsgi.WSGIRequest</em>) – Запрос пользователя</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Страница с целями</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>HttpResponseRedirect</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="goals.views.add_task_view">
+<code class="sig-prename descclassname">goals.views.</code><code class="sig-name descname">add_task_view</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">ID</span></em><span class="sig-paren">)</span><a class="headerlink" href="#goals.views.add_task_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Добавляет задачу в базу данных, сохраняет изменения и отображает их пользователю</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>django.core.handlers.wsgi.WSGIRequest</em>) – Запрос пользователя</p></li>
+<li><p><strong>ID</strong> (<em>Int</em>) – Первичный ключ задачи</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Страница с целью, которой принадлежит задача</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>HttpResponseRedirect</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="goals.views.complete_task">
+<code class="sig-prename descclassname">goals.views.</code><code class="sig-name descname">complete_task</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">ID</span></em><span class="sig-paren">)</span><a class="headerlink" href="#goals.views.complete_task" title="Permalink to this definition">¶</a></dt>
+<dd><p>Меняет значение поля is_finished задачи на True, если оно равно False и наоборот</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>django.core.handlers.wsgi.WSGIRequest</em>) – Запрос пользователя</p></li>
+<li><p><strong>ID</strong> (<em>Int</em>) – Первичный ключ задачи</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Страница цели, которой пренадлежит задача</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>HttpResponseRedirect</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="goals.views.delete_goal">
+<code class="sig-prename descclassname">goals.views.</code><code class="sig-name descname">delete_goal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">ID</span></em><span class="sig-paren">)</span><a class="headerlink" href="#goals.views.delete_goal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Удаляет цель из базы данных и отображает изменения пользователю</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>django.core.handlers.wsgi.WSGIRequest</em>) – Запрос пользователя</p></li>
+<li><p><strong>ID</strong> (<em>Int</em>) – Первичный ключ цели</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Страница с целями</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>HttpResponseRedirect</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="goals.views.delete_task">
+<code class="sig-prename descclassname">goals.views.</code><code class="sig-name descname">delete_task</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">ID</span></em><span class="sig-paren">)</span><a class="headerlink" href="#goals.views.delete_task" title="Permalink to this definition">¶</a></dt>
+<dd><p>Удаляет задачу из базы данных и отображает изменения пользователю</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>django.core.handlers.wsgi.WSGIRequest</em>) – Запрос пользователя</p></li>
+<li><p><strong>ID</strong> (<em>Int</em>) – Первичный ключ задачи</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Страница с целью, которой принадлежала задача</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>HttpResponseRedirect</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="goals.views.edit_goal_view">
+<code class="sig-prename descclassname">goals.views.</code><code class="sig-name descname">edit_goal_view</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">ID</span></em><span class="sig-paren">)</span><a class="headerlink" href="#goals.views.edit_goal_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Изменяет поля цели, сохраняет изменения в базу данных и отображает изменения пользователю</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>django.core.handlers.wsgi.WSGIRequest</em>) – Запрос пользователя</p></li>
+<li><p><strong>ID</strong> (<em>Int</em>) – Первичный ключ цели</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Страница с целью и её содержимым</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>HttpResponseRedirect</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="goals.views.edit_task_view">
+<code class="sig-prename descclassname">goals.views.</code><code class="sig-name descname">edit_task_view</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">ID</span></em><span class="sig-paren">)</span><a class="headerlink" href="#goals.views.edit_task_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Отображает страницу с изменением содержания задачи в случае GET запроса. Изменяет содержимое задачи и сохрняет изменения в базу данных в случае POST запроса</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>django.core.handlers.wsgi.WSGIRequest</em>) – Запрос пользователя</p></li>
+<li><p><strong>ID</strong> (<em>Int</em>) – Первичный ключ задачи</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Страница с целью, которой принадлежит задача</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>HttpResponseRedirect</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="goals.views.goal_view">
+<code class="sig-prename descclassname">goals.views.</code><code class="sig-name descname">goal_view</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">ID</span></em><span class="sig-paren">)</span><a class="headerlink" href="#goals.views.goal_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Отображает цель и её задачи</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>django.core.handlers.wsgi.WSGIRequest</em>) – Запрос пользователя</p></li>
+<li><p><strong>ID</strong> (<em>Int</em>) – Первичный ключ цели</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Страница цели с задачами</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>HttpResponse</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="goals.views.goals_view">
+<code class="sig-prename descclassname">goals.views.</code><code class="sig-name descname">goals_view</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#goals.views.goals_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Отображает страницу с целями</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> (<em>django.core.handlers.wsgi.WSGIRequest</em>) – Запрос пользователя</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Страница с целями</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>django.http.response.HttpResponse</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-goals">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-goals" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">SmartPlanner</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">SmartPlanner</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="SmartPlanner.html">SmartPlanner package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">goals package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manage.html">manage module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="schedule.html">schedule package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="users.html">users package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">utils package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">SmartPlanner</a><ul>
+      <li>Previous: <a href="SmartPlanner.html" title="previous chapter">SmartPlanner package</a></li>
+      <li>Next: <a href="goals.migrations.html" title="next chapter">goals.migrations package</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Gleb Sorokin, Olga Toporkova.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/goals.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
