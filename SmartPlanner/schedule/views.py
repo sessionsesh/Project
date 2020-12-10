@@ -10,8 +10,17 @@ import datetime
 
 @login_required
 def schedule_generator(request):
-    ''' Просто добавляет задачи в FreeTime если их длительность <= длительности FreeTime '''
-    ''' Ставится метка in_process = True '''
+    """Формирует расписание на основе не выполняемых задач
+
+    :param file_loc: The file location of the spreadsheet
+    :type file_loc: str
+    :param print_cols: A flag used to print the columns to the console
+    (default is False)
+    :type print_cols: bool
+    :returns: a list of strings representing the header columns
+    :rtype: list
+    """
+
     freetime = FreeTime.objects.filter(task=None)
     tasks_to_do = Task.objects.filter(in_process=False, is_finished=False)
     for task in tasks_to_do:

@@ -12,7 +12,7 @@
     }
 
     .freetime-container-item {
-        display: inline;
+        display: block;
     }
 
     .freetime-container-item:hover {
@@ -28,7 +28,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <p>Ваше свободное время на</p>
+                <p>Добавить свободное время</p>
                 <span id="freetime-date"></span>
             </div>
             <form action="{% url 'schedule:add_free_time' %}" method="POST">
@@ -36,9 +36,6 @@
                     <label for="task">Выберите задачу для выполнения, если хотите:</label>
                     <select id="tasks" name="task">
                         <option value="task">POST_TEST</option>
-                        <!-- {% for task in tasks %}
-                        <option value="{{ task.id }}" class="task">{{ task.title }}</option>
-                        {% endfor %} -->
                     </select>
                 </div>
 
@@ -93,13 +90,13 @@
                 <li>
                     <div class="freetime-container">
                         <div class="freetime-container-item">
-                            <span>{{ ft.beg_time }} + {{ ft.duration }}min</span>
+                            <span style="font-size:large;">{{ ft.task.title }}</span>
                         </div>
                         <div class="freetime-container-item">
-                            <span></span>{{ ft.task.title }}</span>
-                            <a class="btn btn-danger" type="button"
-                                href="{% url 'schedule:delete_free_time' ft.id %}">del</a>
+                            <span>{{ ft.beg_time }} + {{ ft.duration }}min</span>
                         </div>
+                        <a class="btn btn-danger" type="button"
+                                href="{% url 'schedule:delete_free_time' ft.id %}">X</a>
                     </div>
                 </li>
                 {% endfor %}
